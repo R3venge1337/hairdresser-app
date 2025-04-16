@@ -8,8 +8,8 @@
 --------------------------------------------
 ---------------accounts----------------------
 --------------------------------------------
-CREATE TABLE dbo.users (
-    id bigint NOT NULL IDENTITY(1,1),
+CREATE TABLE users (
+    id BIGSERIAL NOT NULL,
     uuid  UUID NOT NULL,
 	firstname varchar(100) NOT NULL,
 	surname varchar(100) NOT NULL,
@@ -21,21 +21,21 @@ GO
 --------------------------------------------
 ---------------accounts----------------------
 --------------------------------------------
-CREATE TABLE dbo.accounts (
-    id bigint NOT NULL IDENTITY(1,1),
-    nickname  varchar(60) NOT NULL,
+CREATE TABLE accounts (
+    id BIGSERIAL NOT NULL ,
+    username  varchar(60) NOT NULL,
 	password varchar(255) NOT NULL,
 	date_created TIMESTAMP NOT NULL,
 	email varchar(100) NOT NULL,
-	is_active bit NOT NULL,
+	is_active boolean NOT NULL,
 	role_id_fk bigint NOT NULL
 );
 GO
 --------------------------------------------
 ---------------roles----------------------
 --------------------------------------------
-CREATE TABLE dbo.roles (
-    id bigint NOT NULL IDENTITY(1,1),
+CREATE TABLE roles (
+    id BIGSERIAL NOT NULL ,
     name  varchar(50) NOT NULL
 );
 GO
@@ -43,17 +43,17 @@ GO
 -----------------------------------------------------
 --------------Define primary keys-------------------
 -----------------------------------------------------
-ALTER TABLE dbo.users
+ALTER TABLE users
 ADD CONSTRAINT users_pk
 PRIMARY KEY (id);
 GO
 
-ALTER TABLE dbo.accounts
+ALTER TABLE accounts
 ADD CONSTRAINT accounts_pk
 PRIMARY KEY (id);
 GO
 
-ALTER TABLE dbo.roles
+ALTER TABLE roles
 ADD CONSTRAINT roles_pk
 PRIMARY KEY (id);
 GO
@@ -62,18 +62,18 @@ GO
 -----Define foreign keys-------------
 -------------------------------------
 
-ALTER TABLE dbo.users
+ALTER TABLE users
 ADD CONSTRAINT users_accounts_fk
-FOREIGN KEY (accounts_id_fk)
-REFERENCES dbo.accounts(id);
+FOREIGN KEY (account_id_fk)
+REFERENCES accounts(id);
 GO
 
-ALTER TABLE dbo.accounts
+ALTER TABLE accounts
 ADD CONSTRAINT accounts_roles_fk
-FOREIGN KEY (roles_id_fk)
-REFERENCES dbo.roles(id);
+FOREIGN KEY (role_id_fk)
+REFERENCES roles(id);
 GO
 
---rollback DROP TABLE dbo.roles;
---rollback DROP TABLE dbo.accounts;
---rollback DROP TABLE dbo.users;
+--rollback DROP TABLE roles;
+--rollback DROP TABLE accounts;
+--rollback DROP TABLE users;
