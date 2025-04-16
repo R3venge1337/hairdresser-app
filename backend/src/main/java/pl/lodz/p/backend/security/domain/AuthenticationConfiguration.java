@@ -47,8 +47,8 @@ class AuthenticationConfiguration {
     }
 
     @Bean
-    AuthFacade authFacade(final AppUserFacade userFacade, final JwtUtils jwtUtils, final AuthenticationManager authenticationManager, final PasswordFacade passwordFacade, final AccountRepository accountRepository, final RoleRepository roleRepository, final AppUserRepository appUserRepository) {
-        return new AuthService(userFacade, jwtUtils, authenticationManager, passwordFacade, accountRepository, roleRepository, appUserRepository);
+    AuthFacade authFacade(final JwtUtils jwtUtils, final AuthenticationManager authenticationManager, final PasswordFacade passwordFacade, final AccountRepository accountRepository, final RoleRepository roleRepository, final AppUserRepository appUserRepository) {
+        return new AuthService(jwtUtils, authenticationManager, passwordFacade, accountRepository, roleRepository, appUserRepository);
     }
 
     @Bean

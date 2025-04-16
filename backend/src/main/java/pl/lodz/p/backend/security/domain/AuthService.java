@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import pl.lodz.p.backend.common.exception.AlreadyExistException;
 import pl.lodz.p.backend.common.exception.ErrorMessages;
 import pl.lodz.p.backend.common.validation.DtoValidator;
-import pl.lodz.p.backend.security.AppUserFacade;
 import pl.lodz.p.backend.security.AuthFacade;
 import pl.lodz.p.backend.security.PasswordFacade;
 import pl.lodz.p.backend.security.dto.LoginForm;
@@ -21,7 +20,6 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 class AuthService implements AuthFacade {
 
-    private final AppUserFacade userFacade;
     private final JwtUtils jwtUtils;
     private final AuthenticationManager authenticationManager;
     private final PasswordFacade passwordFacade;
