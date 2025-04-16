@@ -47,7 +47,25 @@ class AuthService implements AuthFacade {
         if (accountRepository.existsByUsername(registerForm.username())) {
             throw new AlreadyExistException(ErrorMessages.USER_EXIST_BY_NAME);
         }
-        Role role = roleRepository.findByName(RoleType.CUSTOMER).orElse(null);
+        final Role role = roleRepository.findByName(RoleType.CUSTOMER).orElse(null);
+        final Account account = createAccount(registerForm, role);
+        final Account accountEntity = accountRepository.save(account);
+        final AppUser user = createAppUser(registerForm, accountEntity);
+
+        appUserRepository.save(user);
+
+    }
+
+    private static AppUser createAppUser(final RegisterForm registerForm, final Account accountEntity) {
+        AppUser user = new AppUser();
+        user.setFirstname(registerForm.firstname());
+        user.setSurname(registerForm.surname());
+        user.setPhoneNumber(registerForm.phoneNumber());
+        user.setAccount(accountEntity);
+        return user;
+    }
+
+    private Account createAccount(final RegisterForm registerForm, final Role role) {
         Account account = new Account();
         account.setEmail(registerForm.email());
         account.setUsername(registerForm.username());
@@ -55,16 +73,6 @@ class AuthService implements AuthFacade {
         account.setIsActive(true);
         account.setCreatedDate(LocalDateTime.now());
         account.setRole(role);
-
-        Account accountEntity = accountRepository.save(account);
-
-        AppUser user = new AppUser();
-        user.setFirstname(registerForm.firstname());
-        user.setSurname(registerForm.surname());
-        user.setPhoneNumber(registerForm.phoneNumber());
-        user.setAccount(accountEntity);
-
-        appUserRepository.save(user);
-
+        return account;
     }
 }
