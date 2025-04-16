@@ -2,5 +2,6 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <includeAll path="src/main/resources/sql/evolutions"/>
+    <includeAll path="/sql/evolutions" />
+    <include file="/sql/initialization/init_data.sql" />
 </databaseChangeLog>
