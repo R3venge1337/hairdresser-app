@@ -21,24 +21,25 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "accounts")
 @FieldNameConstants
+@NoArgsConstructor
 class Account extends AbstractIdEntity {
 
-        @Column(name = "nickname")
-        private String nickname;
+    @Column(name = "username")
+    private String username;
 
-        @Column(name = "password")
-        private String password;
+    @Column(name = "password")
+    private String password;
 
-        @Column(name = "date_created")
-        private LocalDateTime createdDate;
+    @Column(name = "date_created")
+    private LocalDateTime createdDate;
 
-        @Column(name = "email")
-        private String email;
+    @Column(name = "email")
+    private String email;
 
-        @Column(name = "is_active")
-        private Boolean isActive;
+    @Column(name = "is_active")
+    private Boolean isActive;
 
-        @ManyToOne(fetch = FetchType.EAGER)
-        @JoinColumn(name = "role_id_fk")
-        private Role role;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id_fk")
+    private Role role;
 }
