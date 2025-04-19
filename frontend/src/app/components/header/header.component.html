@@ -1,0 +1,19 @@
+<header>
+    <mat-toolbar class="header">
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Logo" class="logo" />
+            <span class="app-title">Salon Fryzjerski</span>
+        </div>
+        <nav class="nav-links">
+            <a mat-button routerLink="/">Strona główna</a>
+
+            <div *ngIf="authService.isLoggedIn(); else loggedOut">
+                <span>Witaj, {{ username }}! [{{ userRole }}]</span>
+                <a mat-button routerLink="/logout">Wyloguj</a>
+            </div>
+            <ng-template #loggedOut>
+                <a mat-button routerLink="/login">Zaloguj się</a>
+            </ng-template>
+        </nav>
+    </mat-toolbar>
+</header>
