@@ -30,7 +30,7 @@ class AuthService implements AuthFacade {
     @Override
     public LoginResponse login(final LoginForm loginForm) {
         DtoValidator.validate(loginForm);
-        Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.login(), loginForm.password()));
+        Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.username(), loginForm.password()));
         AuthorizationUser authorizationUser = (AuthorizationUser) auth.getPrincipal();
         String jwt = jwtUtils.generateToken(authorizationUser.getUserDto());
         return new LoginResponse(jwt);
