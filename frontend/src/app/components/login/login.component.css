@@ -1,0 +1,26 @@
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.registration-notice {
+    margin-top: 16px;
+    text-align: center;
+
+}
+
+.registration-notice a {
+    color: #3f51b5;
+    text-decoration: underline;
+    cursor: pointer;
+}
