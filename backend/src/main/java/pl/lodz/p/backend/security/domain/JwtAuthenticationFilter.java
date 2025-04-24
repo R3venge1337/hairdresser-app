@@ -16,7 +16,6 @@ import pl.lodz.p.backend.security.dto.JWTBodyAttributes;
 import pl.lodz.p.backend.security.dto.UserDto;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,12 +49,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             final String surname = claims.get(JwtUtils.USER_SURNAME, String.class);
             final String userUuid = claims.get(JwtUtils.USER_UUID, String.class);
             final String userEmail = claims.get(JwtUtils.USER_EMAIL, String.class);
-            final String userRole = claims.get(JwtUtils.USER_ROLE, String.class);
+            final String userRole = claims.get(JwtUtils.USER_TYPE, String.class);
             final String userPhoneNumber = claims.get(JwtUtils.USER_PHONENUMBER, String.class);
             final String accountEnabled = String.valueOf(claims.get(JwtUtils.ACCOUNT_ENABLED, Boolean.class));
-            final String userCreatedDate = String.valueOf(claims.get(JwtUtils.USER_CREATEDDATE, LocalDateTime.class));
 
-            final JWTBodyAttributes attributes = new JWTBodyAttributes(userUuid, firstname, surname, userPhoneNumber, username, userEmail, accountEnabled, userCreatedDate, userRole);
+            final JWTBodyAttributes attributes = new JWTBodyAttributes(userUuid, firstname, surname, userPhoneNumber, username, userEmail, accountEnabled, userRole);
 
 
             if (!jwtTokenUtil.isTokenExpired(jwt)) {
@@ -76,6 +74,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private UserDto createJwtBody(final JWTBodyAttributes attributes) {
         return new UserDto(UUID.fromString(attributes.userUuid()), attributes.firstname(), attributes.surname(),
                 attributes.phoneNumber(), attributes.username(), null, attributes.email(),
-                Boolean.valueOf(attributes.isActive()), LocalDateTime.parse(attributes.createdDate()), attributes.role());
+                Boolean.valueOf(attributes.isActive()), null, attributes.role());
     }
 }
