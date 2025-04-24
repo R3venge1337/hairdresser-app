@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import pl.lodz.p.backend.security.dto.UserDto;
 
 import javax.crypto.SecretKey;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
@@ -33,9 +32,7 @@ public class JwtUtils {
     static final String ACCOUNT_ENABLED = "accountEnabled";
     static final String USER_FIRSTNAME = "userFirstname";
     static final String USER_SURNAME = "userSurname";
-    static final String USER_ROLE = "userRole";
     static final String USER_PHONENUMBER = "userPhoneNumber";
-    static final String USER_CREATEDDATE = "userCreatedAt";
 
     //retrieve username from jwt token
     public String getUsernameFromToken(final String token) {
@@ -77,8 +74,7 @@ public class JwtUtils {
                 ACCOUNT_ENABLED, user.isActive(),
                 USER_FIRSTNAME, user.firstname(),
                 USER_SURNAME, user.surname(),
-                USER_PHONENUMBER, user.phoneNumber(),
-                USER_CREATEDDATE, user.createdDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                USER_PHONENUMBER, user.phoneNumber()
         );
 
         return doGenerateToken(extraClaims, user);
