@@ -1,5 +1,6 @@
 package pl.lodz.p.backend.appointment.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +24,8 @@ import pl.lodz.p.backend.common.controller.RoutePaths;
 class HairOfferController {
     private final HairOfferFacade hairOfferFacade;
 
-    @GetMapping(RoutePaths.HAIR_OFFERS)
-    PageDto<HairOfferDto> findAllHairOffers(@RequestBody final HairOfferFilterForm filterForm, final PageableRequest pageableRequest){
+    @PostMapping(RoutePaths.HAIR_OFFERS + "/filter")
+    PageDto<HairOfferDto> findAllHairOffers(@Valid @RequestBody final HairOfferFilterForm filterForm, final PageableRequest pageableRequest){
         return hairOfferFacade.findAllHairOffers(filterForm, pageableRequest);
     }
 
