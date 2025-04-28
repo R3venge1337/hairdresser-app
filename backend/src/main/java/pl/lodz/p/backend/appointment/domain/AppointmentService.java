@@ -55,7 +55,7 @@ class AppointmentService implements AppointmentFacade {
 
     private Set<HairOfferDto> mapToHairOffersDto(Appointment appointment) {
         return appointment.getHairOffers().stream()
-                .map(hairOffer -> new HairOfferDto(hairOffer.getName(), hairOffer.getDescription(), hairOffer.getPrice(), hairOffer.getDuration())).collect(Collectors.toUnmodifiableSet());
+                .map(hairOffer -> new HairOfferDto(hairOffer.getId(),hairOffer.getName(), hairOffer.getDescription(), hairOffer.getPrice(), hairOffer.getDuration())).collect(Collectors.toUnmodifiableSet());
     }
 
     @Override
