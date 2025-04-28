@@ -43,7 +43,7 @@ class HairOfferService implements HairOfferFacade {
     }
 
     private HairOfferDto mapToDto(final HairOffer hairOffer) {
-        return new HairOfferDto(hairOffer.getName(), hairOffer.getDescription(), hairOffer.getPrice(), hairOffer.getDuration());
+        return new HairOfferDto(hairOffer.getId(), hairOffer.getName(), hairOffer.getDescription(), hairOffer.getPrice(), hairOffer.getDuration());
     }
 
     @Override
@@ -75,6 +75,8 @@ class HairOfferService implements HairOfferFacade {
         hairOffer.setDescription(updateForm.description());
         hairOffer.setPrice(updateForm.price());
         hairOffer.setDuration(updateForm.duration());
+
+        hairOfferRepository.save(hairOffer);
 
     }
 
