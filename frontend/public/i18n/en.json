@@ -1,0 +1,67 @@
+{
+  "app-title": "Hairdresser",
+  "welcome-user": "Hello",
+  "navbar": {
+    "appointments": "Appointments",
+    "hairoffers": "Hairoffers"
+  },
+  "roles": {
+    "CUSTOMER": "Customer",
+    "ADMIN": "Administrator",
+    "HAIRDRESSER": "Hairdresser"
+  },
+  "home": {
+    "title": "Welcome to our hair salon!",
+    "cards": [
+      {
+        "title": "Hair Styling",
+        "description": "We offer professional hair styling services that will enhance your beauty. Trust our experienced hairdressers!",
+        "imageUrl": "home1.jpg"
+      },
+      {
+        "title": "Coloring",
+        "description": "Change your look with our coloring services. We offer a wide range of colors and techniques to meet your expectations.",
+        "imageUrl": "home2.jpg"
+      },
+      {
+        "title": "Hair Care",
+        "description": "Take care of your hair with our specialized care treatments. We offer top-quality products that will nourish your hair.",
+        "imageUrl": "home3.jpg"
+      }
+    ]
+  },
+  "login": {
+    "header-title": "Sign in",
+    "button-title": "Sign in",
+    "fields": {
+      "username": "Username",
+      "password": "Password"
+    },
+    "errors": {
+      "username": "Username is required.",
+      "password": "Password is required."
+    }
+  },
+  "register": {
+    "header-title": "Registration",
+    "pre-desc": "No Account?",
+    "button-title": "Sign up",
+    "fields": {
+      "name": "Name",
+      "surname": "Surname",
+      "email": "Email",
+      "username": "Username",
+      "password": "Password",
+      "phone": "Phone"
+    },
+    "errors": {
+      "name": "Name is required",
+      "surname": "Surname is required",
+      "username": "Username is required.",
+      "password": "Password is required.",
+      "email": "Email is required",
+      "email-format": "Email is not in a valid form",
+      "phone": "Phone is required."
+    }
+  }
+}

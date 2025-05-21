@@ -1,0 +1,67 @@
+{
+  "app-title": "Salon Fryzjerski",
+  "welcome-user": "Witaj",
+  "navbar": {
+    "appointments": "Spotkania",
+    "hairoffers": "Usługi"
+  },
+  "roles": {
+    "CUSTOMER": "Klient",
+    "ADMIN": "Administrator",
+    "HAIRDRESSER": "Fryzjer"
+  },
+  "home": {
+    "title": "Witamy w naszym salonie fryzjerskim!",
+    "cards": [
+      {
+        "title": "Stylizacja włosów",
+        "description": "Oferujemy profesjonalne usługi stylizacji włosów, które podkreślą Twoją urodę. Zaufaj naszym doświadczonym fryzjerom!",
+        "imageUrl": "home1.jpg"
+      },
+      {
+        "title": "Koloryzacja",
+        "description": "Zmień swój wygląd dzięki naszym usługom koloryzacji. Oferujemy szeroki wybór kolorów i technik, które spełnią Twoje oczekiwania.",
+        "imageUrl": "home2.jpg"
+      },
+      {
+        "title": "Pielęgnacja włosów",
+        "description": "Dbaj o swoje włosy z naszymi specjalistycznymi zabiegami pielęgnacyjnymi. Oferujemy produkty najwyższej jakości, które odżywią Twoje włosy.",
+        "imageUrl": "home3.jpg"
+      }
+    ]
+  },
+  "login": {
+    "header-title": "Formularz logowania",
+    "button-title": "Zaloguj się",
+    "fields": {
+      "username": "Naza użytkownika",
+      "password": "Hasło"
+    },
+    "errors": {
+      "username": "Nazwa użytkownika jest wymagana.",
+      "password": "Hasło jest wymagane."
+    }
+  },
+  "register": {
+    "header-title": "Rejestracja",
+    "pre-desc": "Nie masz konta?",
+    "button-title": "Zarejestruj się",
+    "fields": {
+      "name": "Imię",
+      "surname": "Nazwisko",
+      "email": "Email",
+      "username": "Naza użytkownika",
+      "password": "Hasło",
+      "phone": "Nr.telefonu"
+    },
+    "errors": {
+      "name": "Imię jest wymagane",
+      "surname": "Nazwisko jest wymagane",
+      "username": "Nazwa użytkownika jest wymagana.",
+      "password": "Hasło jest wymagane.",
+      "email": "Email jest wymagany",
+      "email-format": "Email jest w złym formacie",
+      "phone": "Numer telefonu jest wymagany."
+    }
+  }
+}

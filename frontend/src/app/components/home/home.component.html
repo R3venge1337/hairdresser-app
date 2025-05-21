@@ -1,7 +1,7 @@
 <div class="dashboard">
-    <h1>Witamy w naszym salonie fryzjerskim!</h1>
+    <h1>{{"home.title" | translate}}</h1>
     <div class="card-container">
-        <div *ngFor="let card of cards" class="card">
+        <div *ngFor="let card of 'home.cards' | translate " class="card">
             <img [src]="card.imageUrl" alt="{{ card.title }}" class="card-image">
             <div class="card-content">
                 <h2>{{ card.title }}</h2>

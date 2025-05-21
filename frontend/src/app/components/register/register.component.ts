@@ -19,6 +19,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -32,6 +33,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,
+    TranslateModule,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',

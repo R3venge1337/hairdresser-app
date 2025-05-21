@@ -1,65 +1,65 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <mat-card>
         <mat-card-header>
-            <mat-card-title>Rejestracja</mat-card-title>
+            <mat-card-title>{{"register.header-title" | translate}}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <div class="form-fields">
                 <mat-form-field appearance="fill">
-                    <mat-label>Imię</mat-label>
+                    <mat-label>{{"register.fields.name" | translate}}</mat-label>
                     <input matInput formControlName="firstname" required>
                     <mat-error *ngIf="registerForm.get('firstname')?.hasError('required')">
-                        Imię jest wymagane.
+                        {{"register.errors.name" | translate}}
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
-                    <mat-label>Nazwisko</mat-label>
+                    <mat-label>{{"register.fields.surname" | translate}}</mat-label>
                     <input matInput formControlName="surname" required>
                     <mat-error *ngIf="registerForm.get('surname')?.hasError('required')">
-                        Nazwisko jest wymagane.
+                        {{"register.errors.surname" | translate}}
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
-                    <mat-label>Adres e-mail</mat-label>
+                    <mat-label>{{"register.fields.email" | translate}}</mat-label>
                     <input matInput formControlName="email" required>
                     <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
-                        Adres e-mail jest wymagany.
+                        {{"register.errors.email" | translate}}
                     </mat-error>
                     <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
-                        Proszę podać prawidłowy adres e-mail.
+                        {{"register.errors.email-format" | translate}}
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
-                    <mat-label>Nazwa użytkownika</mat-label>
+                    <mat-label>{{"register.fields.username" | translate}}</mat-label>
                     <input matInput formControlName="username" required>
                     <mat-error *ngIf="registerForm.get('username')?.hasError('required')">
-                        Nazwa użytkownika jest wymagana.
+                        {{"register.errors.username" | translate}}
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
-                    <mat-label>Hasło</mat-label>
+                    <mat-label>{{"register.fields.password" | translate}}</mat-label>
                     <input matInput type="password" formControlName="password" required>
                     <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
-                        Hasło jest wymagane.
+                        {{"register.errors.password" | translate}}
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
-                    <mat-label>Numer telefonu</mat-label>
+                    <mat-label>{{"register.fields.phone" | translate}}</mat-label>
                     <input matInput formControlName="phoneNumber" required>
                     <mat-error *ngIf="registerForm.get('phoneNumber')?.hasError('required')">
-                        Numer telefonu jest wymagany.
+                        {{"register.errors.phone" | translate}}
                     </mat-error>
                 </mat-form-field>
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Zarejestruj
-                się</button>
+            <button mat-raised-button color="primary" type="submit"
+                [disabled]="registerForm.invalid">{{"register.button-title" | translate}}</button>
         </mat-card-actions>
     </mat-card>
 </form>

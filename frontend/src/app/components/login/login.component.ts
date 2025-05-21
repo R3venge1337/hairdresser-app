@@ -14,6 +14,7 @@ import { MatCard, MatCardActions, MatCardModule } from '@angular/material/card';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,7 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     RouterLink,
     ToastrModule,
+    TranslateModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',

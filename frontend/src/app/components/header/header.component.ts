@@ -5,10 +5,21 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { jwtDecode } from 'jwt-decode';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LanguageSwitcherComponent } from '../language-switcher/language-switcher.component';
 
 @Component({
   selector: 'app-header',
-  imports: [MatToolbarModule, MatButtonModule, CommonModule, RouterLink],
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    CommonModule,
+    RouterLink,
+    MatIconModule,
+    TranslateModule,
+    LanguageSwitcherComponent,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -16,7 +27,11 @@ export class HeaderComponent implements OnInit {
   username: string | null = null;
   userRole: string | null = null;
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    public translateService: TranslateService
+  ) {}
 
   ngOnInit() {
     this.authService.checkLoginStatus();
