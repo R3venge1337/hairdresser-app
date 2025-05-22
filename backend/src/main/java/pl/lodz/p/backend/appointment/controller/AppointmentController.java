@@ -21,6 +21,8 @@ import pl.lodz.p.backend.common.controller.PageDto;
 import pl.lodz.p.backend.common.controller.PageableRequest;
 import pl.lodz.p.backend.common.controller.RoutePaths;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -35,13 +37,22 @@ class AppointmentController {
         return appointmentFacade.findAllAppointments(filterForm, pageableRequest);
     }
 
+    @GetMapping(RoutePaths.USERS + "/" + "{uuid}" + RoutePaths.APPOINTMENTS)
+    List<AppointmentDto> findAllAppointmentsSpecificUser(@PathVariable final UUID uuid) {
+        return appointmentFacade.findAllAppointmentsSpecificUser(uuid);
+    }
+
+    @GetMapping(RoutePaths.APPOINTMENTS_DATE)
+    List<AppointmentDto> findAllAppointmentsInSpecificDay(@RequestBody final LocalDateTime dateTime) {
+        return appointmentFacade.findAllAppointmentsInSpecificDate(dateTime);
+    }
 
     @GetMapping(RoutePaths.USERS)
     Set<AppointmentUserDto> findAllUsersByRole(@RequestParam String roleName) {
         return appointmentUserFacade.findUsersByRole(roleName);
     }
 
-    @GetMapping(RoutePaths.APPOINTMENTS + "/uuid")
+    @GetMapping(RoutePaths.APPOINTMENTS + "/{uuid}")
     AppointmentDto findAppointmentByUuid(@PathVariable final UUID uuid) {
         return appointmentFacade.findAppointmentByUuid(uuid);
     }
@@ -52,12 +63,12 @@ class AppointmentController {
         return appointmentFacade.makeAppointment(createForm);
     }
 
-    @PatchMapping(RoutePaths.APPOINTMENTS + "/uuid/status")
+    @PatchMapping(RoutePaths.APPOINTMENTS + "/{uuid}/status")
     void changeAppointmentStatus(@PathVariable final UUID uuid, @RequestBody final String status) {
         appointmentFacade.changeAppointmentStatus(uuid, status);
     }
 
-    @PatchMapping(RoutePaths.APPOINTMENTS + "/uuid/hairdresser/{hairdresserUuid}")
+    @PatchMapping(RoutePaths.APPOINTMENTS + "/{uuid}/hairdresser/{hairdresserUuid}")
     void changeHairdresserAppointment(@PathVariable final UUID uuid, @PathVariable final UUID hairdresserUuid) {
         appointmentFacade.changeHairdresserAppointment(uuid, hairdresserUuid);
     }

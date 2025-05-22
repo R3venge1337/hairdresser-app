@@ -23,9 +23,9 @@ GO
 CREATE TABLE appointments (
     id BIGSERIAL NOT NULL,
     uuid  UUID NOT NULL,
-    totalCost DECIMAL(10, 2) NOT NULL,
+    total_cost DECIMAL(10, 2) NOT NULL,
     status VARCHAR(50) NOT NULL,
-    bookedDate TIMESTAMP NOT NULL,
+    booked_date TIMESTAMP NOT NULL,
     customer_id_fk  bigint NOT NULL,
     hairdresser_id_fk  bigint NOT NULL
 );

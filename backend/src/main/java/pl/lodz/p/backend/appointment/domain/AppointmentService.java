@@ -17,6 +17,8 @@ import pl.lodz.p.backend.common.exception.ErrorMessages;
 import pl.lodz.p.backend.common.exception.NotFoundException;
 import pl.lodz.p.backend.common.validation.DtoValidator;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -43,6 +45,18 @@ class AppointmentService implements AppointmentFacade {
     }
 
     @Override
+    public List<AppointmentDto> findAllAppointmentsSpecificUser(final UUID uuid) {
+        return appointmentRepository.findAllUserAppointments(uuid).stream().map(this::mapToDto
+                ).toList();
+    }
+
+    @Override
+    public List<AppointmentDto> findAllAppointmentsInSpecificDate(final LocalDateTime dateTime) {
+        return appointmentRepository.findAllUsersAppointmentsByDate(dateTime).stream().map(this::mapToDto
+        ).toList();
+    }
+
+    @Override
     public AppointmentDto findAppointmentByUuid(final UUID uuid) {
         return appointmentRepository.findByUuid(uuid)
                 .map(this::mapToDto)
@@ -50,7 +64,7 @@ class AppointmentService implements AppointmentFacade {
     }
 
     private AppointmentDto mapToDto(final Appointment appointment) {
-        return new AppointmentDto(appointment.getUuid(), appointment.getCustomer().getFirstname(), appointment.getCustomer().getSurname(), appointment.getHairdresser().getUuid(), appointment.getHairdresser().getFirstname(), appointment.getHairdresser().getSurname(), appointment.getTotalCost(), mapToHairOffersDto(appointment), appointment.getStatus().name(), appointment.getBookedDate());
+        return new AppointmentDto(appointment.getUuid(), appointment.getCustomer().getUuid(), appointment.getCustomer().getFirstname(), appointment.getCustomer().getSurname(), appointment.getHairdresser().getUuid(), appointment.getHairdresser().getFirstname(), appointment.getHairdresser().getSurname(), appointment.getTotalCost(), mapToHairOffersDto(appointment), appointment.getStatus().name(), appointment.getBookedDate());
     }
 
     private Set<HairOfferDto> mapToHairOffersDto(Appointment appointment) {

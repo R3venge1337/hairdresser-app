@@ -50,14 +50,14 @@ class Appointment extends AbstractUuidEntity {
     )
     private Set<HairOffer> hairOffers = new HashSet<>();
 
-    @Column(name = "totalCost")
+    @Column(name = "total_cost")
     private BigDecimal totalCost;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status;
 
-    @Column(name = "bookedDate")
+    @Column(name = "booked_date")
     private LocalDateTime bookedDate;
 
     public void addHairOffer(HairOffer hairOffer) {
