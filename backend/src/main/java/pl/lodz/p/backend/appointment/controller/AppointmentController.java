@@ -2,6 +2,7 @@ package pl.lodz.p.backend.appointment.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -43,7 +44,7 @@ class AppointmentController {
     }
 
     @GetMapping(RoutePaths.APPOINTMENTS_DATE)
-    List<AppointmentDto> findAllAppointmentsInSpecificDay(@RequestBody final LocalDateTime dateTime) {
+    List<AppointmentDto> findAllAppointmentsInSpecificDay(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) final LocalDateTime dateTime) {
         return appointmentFacade.findAllAppointmentsInSpecificDate(dateTime);
     }
 
