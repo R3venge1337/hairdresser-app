@@ -29,7 +29,7 @@ class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorize -> {
-                    authorize.requestMatchers("/static/**", "/resources/**","/login*","/register*").anonymous();
+                    authorize.requestMatchers("/static/**", "/resources/**","/login*","/register*","/swagger-ui/**","/swagger-ui.html", "/swagger-resources/**", "/v3/api-docs/**").anonymous();
                     authorize.anyRequest().authenticated();
                 })
                 .requestCache(RequestCacheConfigurer::disable)
