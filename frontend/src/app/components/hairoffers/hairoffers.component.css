@@ -1,0 +1,23 @@
+div {
+    margin: 20px;
+}
+
+h2,
+h3 {
+    color: #333;
+}
+
+mat-form-field {
+    width: 100%;
+    max-width: 300px;
+    margin-right: 10px;
+}
+
+button {
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+}

@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TranslateModule } from '@ngx-translate/core';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -34,6 +35,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatToolbarModule,
     MatButtonModule,
     TranslateModule,
+    ToastrModule,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
@@ -44,7 +46,8 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastrService
   ) {
     this.registerForm = this.fb.group({
       firstname: ['', Validators.required],
@@ -57,12 +60,24 @@ export class RegisterComponent {
   }
 
   async onSubmit() {
+    const formData: RegisterForm = this.registerForm.value;
     if (this.registerForm.valid) {
-      const formData: RegisterForm = this.registerForm.value;
-      await this.authService.register(formData);
-      this.router.navigate(['/login']);
-    } else {
-      console.log('Formularz jest nieprawidłowy');
+      this.authService.register(formData).subscribe({
+        next: () => {
+          this.router.navigate(['/login']); // Przekieruj na stronę logowania po pomyślnej rejestracji
+        },
+        error: (error) => {
+          // Ten blok wykona się, jeśli rejestracja zakończy się błędem
+          console.error('Registration failed:', error);
+          // Obsłuż specyficzne błędy rejestracji, jeśli backend je zwraca (np. konflikt)
+          if (error.status === 409) {
+            // Konflikt, np. nazwa użytkownika/e-mail już istnieje
+            this.toastService.error(
+              'Użytkownik z podaną nazwą użytkownika lub e-mailem już istnieje.'
+            );
+          }
+        },
+      });
     }
   }
 }

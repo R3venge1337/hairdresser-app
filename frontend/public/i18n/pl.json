@@ -2,7 +2,12 @@
   "app-title": "Salon Fryzjerski",
   "welcome-user": "Witaj",
   "navbar": {
-    "appointments": "Spotkania",
+    "users": "Użytkownicy",
+    "stats": "Statystyki",
+    "all-appointments": "Wszystkie spotkania",
+    "hairdressers": "Fryzjerzy",
+    "my-appointments": "Moje spotkania",
+    "appointments": "Zapisy",
     "hairoffers": "Usługi"
   },
   "roles": {
@@ -34,7 +39,7 @@
     "header-title": "Formularz logowania",
     "button-title": "Zaloguj się",
     "fields": {
-      "username": "Naza użytkownika",
+      "username": "Nazwa użytkownika",
       "password": "Hasło"
     },
     "errors": {
@@ -50,7 +55,7 @@
       "name": "Imię",
       "surname": "Nazwisko",
       "email": "Email",
-      "username": "Naza użytkownika",
+      "username": "Nazwa użytkownika",
       "password": "Hasło",
       "phone": "Nr.telefonu"
     },
@@ -63,5 +68,232 @@
       "email-format": "Email jest w złym formacie",
       "phone": "Numer telefonu jest wymagany."
     }
+  },
+  "hairdresser": {
+    "card-title": "Lista fryzjerów",
+    "id": "Identyfikator",
+    "name": "Imię",
+    "surname": "Nazwisko",
+    "phone": "Nr.telefonu",
+    "empty-list": "Nie znaleziono żadnych fryzjerów"
+  },
+  "my-appointments": {
+    "card-title": "Moje spotkania",
+    "card-sub-title": "Wyświetlanie poprzednich i nadchodzących spotkań",
+    "filters": {
+      "status": "Wszystkie statusy",
+      "hairdresser-firstname": "Imię fryzjera ",
+      "hairdresser-surname": "Nazwisko fryzjera",
+      "start-date": "Data początkowa",
+      "end-date": "Data końcowa",
+      "button-apply-filters": "Zatwierdź filtry",
+      "button-clear-filters": "Wyczyść filtry"
+    },
+    "table-label-id": "ID",
+    "table-label-customer": "Klient",
+    "table-label-hairdresser": "Fryzjer",
+    "table-label-datetime": "Data i Czas spotkania",
+    "table-label-cost": "Koszt",
+    "table-label-status": "Status",
+    "table-label-services": "Uslugi",
+    "table-label-actions": "Akcje",
+    "empty-list": "Brak znalezionych spotkań według podanych kryteriów",
+    "error-loading": "Nie udało się załadować spotkań.",
+    "actions": {
+      "accept": "Akceptuj spotkanie",
+      "cancel": "Anuluj spotkanie",
+      "changeTerm": "Zmień termin spotkania",
+      "makePayment": "Dokonaj płatności"
+    },
+    "confirm-accept": "Czy na pewno chcesz zaakceptować to spotkanie?",
+    "confirm-cancel": "Czy na pewno chcesz anulować to spotkanie?",
+    "accept-success": "Spotkanie zaakceptowano pomyślnie!",
+    "accept-error": "Błąd podczas akceptacji spotkania.",
+    "cancel-success": "Spotkanie anulowano pomyślnie!",
+    "cancel-error": "Błąd podczas anulowania spotkania.",
+    "change-date-feature": "Funkcja zmiany terminu zostanie otworzona w nowym oknie.",
+    "payment-process": "Rozpoczynanie procesu płatności..."
+  },
+  "all-appointments": {
+    "card-title": "Wszystkie spotkania",
+    "card-sub-title": "Wyświetlanie wszystkich poprzednich i nadchodzących spotkań",
+    "filters": {
+      "status": "Wszystkie statusy",
+      "hairdresser-firstname": "Imię fryzjera ",
+      "hairdresser-surname": "Nazwisko fryzjera",
+      "start-date": "Data początkowa",
+      "end-date": "Data końcowa",
+      "button-apply-filters": "Zatwierdź filtry",
+      "button-clear-filters": "Wyczyść filtry"
+    },
+    "table-label-id": "ID",
+    "table-label-customer": "Klient",
+    "table-label-hairdresser": "Fryzjer",
+    "table-label-datetime": "Data i Czas spotkania",
+    "table-label-cost": "Koszt",
+    "table-label-status": "Status",
+    "table-label-services": "Uslugi",
+    "empty-list": "Brak znalezionych spotkań według podanych kryteriów"
+  },
+  "appointment-status-chart": {
+    "title": "Statusy Spotkań",
+    "no-data": "Brak danych spotkań aby wyświetlić na wykresie."
+  },
+  "hair-offer-chart": {
+    "title": "Ilość usług przeprowadzanych",
+    "no-data": "Brak danych spotkań aby wyświetlić na wykresie."
+  },
+  "dashboard.title": "Statystyki",
+  "userProfileDashboard": {
+    "userUuid": "Identyfikator",
+    "title": "Profil Użytkownika",
+    "loading": "Ładowanie profilu...",
+    "errors": {
+      "noUuid": "Brak identyfikatora użytkownika w adresie URL.",
+      "fetchFailed": "Nie udało się załadować profilu użytkownika. Spróbuj ponownie później."
+    },
+    "details": {
+      "userUuid": "Identyfikator",
+      "firstNameSurname": "Imię i Nazwisko:",
+      "phoneNumber": "Numer Telefonu:",
+      "username": "Nazwa Użytkownika:",
+      "email": "Email:",
+      "createdAt": "Utworzono:",
+      "active": "Aktywny:",
+      "role": "Rola:",
+      "isActiveYes": "Tak",
+      "isActiveNo": "Nie"
+    },
+    "noData": "Brak danych profilowych do wyświetlenia.",
+    "toastMessages": {
+      "loadSuccess": "Pomyślnie załadowano profil użytkownika.",
+      "noUuidError": "Brak identyfikatora użytkownika. Zaloguj się ponownie.",
+      "loadError": "Nie udało się załadować profilu użytkownika."
+    }
+  },
+  "hairOffers": {
+    "title": "Oferty Usług Włosowych",
+    "filters": {
+      "name": "Nazwa",
+      "priceLow": "Cena od",
+      "priceHigh": "Cena do",
+      "durationLow": "Czas trwania od",
+      "durationHigh": "Czas trwania do",
+      "applyButton": "Zastosuj Filtry",
+      "placeholders": {
+        "enterName": "Wprowadź nazwę",
+        "enterMinPrice": "Wprowadź minimalną cenę",
+        "enterMaxPrice": "Wprowadź maksymalną cenę",
+        "enterMinDuration": "Wprowadź minimalny czas trwania",
+        "enterMaxDuration": "Wprowadź maksymalny czas trwania"
+      }
+    },
+    "addOffer": {
+      "button": "Dodaj Nową Ofertę",
+      "formTitle": "Dodaj Nową Ofertę Usług Włosowych",
+      "name": "Nazwa",
+      "description": "Opis",
+      "price": "Cena",
+      "duration": "Czas trwania",
+      "addButton": "Dodaj Ofertę",
+      "cancelButton": "Anuluj"
+    },
+    "availableOffers": {
+      "title": "Dostępne Oferty",
+      "tableHeaders": {
+        "name": "Nazwa",
+        "description": "Opis",
+        "price": "Cena",
+        "duration": "Czas trwania",
+        "actions": "Akcje"
+      },
+      "pagination": {
+        "ariaLabel": "Wybierz stronę elementów"
+      }
+    }
+  },
+  "userList": {
+    "title": "Lista Użytkowników",
+    "loading": "Ładowanie listy użytkowników...",
+    "errors": {
+      "fetchFailed": "Nie udało się załadować listy użytkowników. Spróbuj ponownie później."
+    },
+    "tableHeaders": {
+      "id": "Identyfikator",
+      "firstName": "Imię",
+      "surname": "Nazwisko",
+      "email": "Email",
+      "role": "Rola",
+      "active": "Aktywny",
+      "actions": "Akcje"
+    },
+    "activeYes": "Tak",
+    "activeNo": "Nie",
+    "buttons": {
+      "viewDetailsAriaLabel": "Wyświetl szczegóły profilu użytkownika"
+    },
+    "noData": "Brak danych użytkowników do wyświetlenia.",
+    "pagination": {
+      "ariaLabel": "Wybierz stronę elementów"
+    },
+    "toastMessages": {
+      "loadSuccess": "Pomyślnie załadowano listę użytkowników.",
+      "loadError": "Nie udało się załadować listy użytkowników."
+    }
+  },
+  "accessDenied": {
+    "title": "Dostęp Zabroniony",
+    "message1": "Nie masz wymaganych uprawnień, aby uzyskać dostęp do tej strony.",
+    "message2": "Jeśli uważasz, że to pomyłka, skontaktuj się z administratorem systemu.",
+    "buttons": {
+      "goToHome": "Przejdź do Strony Głównej",
+      "goToLogin": "Zaloguj się ponownie"
+    }
+  },
+  "changeAppointmentDialog": {
+    "title": "Zmień Termin Spotkania",
+    "currentAppointmentInfo": "Obecne szczegóły spotkania:",
+    "hairdresser": "Fryzjer",
+    "currentDate": "Obecna data",
+    "totalCost": "Całkowity koszt",
+    "services": "Usługi",
+    "selectNewDate": "Wybierz nową datę",
+    "loadingSlots": "Ładowanie dostępnych slotów...",
+    "availableSlots": "Dostępne sloty",
+    "noSlotsMessage": "Brak dostępnych slotów dla wybranej daty i fryzjera.",
+    "cancel": "Anuluj",
+    "confirm": "Potwierdź zmianę",
+    "selectDateWarning": "Proszę wybrać datę.",
+    "selectSlotWarning": "Proszę wybrać dostępny slot.",
+    "errorLoadingSlots": "Błąd ładowania dostępnych slotów.",
+    "rescheduleSuccess": "Termin spotkania zmieniony pomyślnie!",
+    "rescheduleError": "Błąd podczas zmiany terminu spotkania."
+  },
+  "calendar": {
+    "monthYearFormat": "{{month}}, {{year}}",
+    "todayButton": "Dzisiaj",
+    "weekDays": {
+      "pon": "Pon",
+      "wt": "Wt",
+      "śr": "Śr",
+      "czw": "Czw",
+      "pt": "Pt",
+      "sob": "Sob",
+      "nd": "Nd"
+    },
+    "dailyAppointmentsTitle": "Spotkania na dzień {{date}}",
+    "dailyAppointmentsGenericTitle": "Dzienne Spotkania",
+    "tableHeaders": {
+      "time": "Godzina",
+      "customer": "Klient",
+      "hairdresser": "Fryzjer",
+      "services": "Usługi",
+      "totalCost": "Całkowity Koszt",
+      "status": "Status"
+    },
+    "noAppointmentsForDate": "Brak spotkań dla wybranej daty.",
+    "selectDayToViewAppointments": "Proszę wybrać dzień, aby zobaczyć spotkania.",
+    "bookAppointmentButton": "Zarezerwuj Spotkanie",
+    "selectDayToBookNew": "Proszę wybrać dzień, aby zarezerwować nowe spotkanie."
   }
 }

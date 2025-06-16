@@ -22,6 +22,9 @@ public class JwtUtils {
     @Value("${jwt.expirationTime}")
     private long JWT_TOKEN_VALIDITY;
 
+    @Value("${jwt.refreshExpirationTime}")
+    private long JWT_REFRESH_TOKEN_VALIDITY;
+
     @Value("${jwt.secret.key}")
     private String secret;
 
@@ -77,7 +80,7 @@ public class JwtUtils {
                 USER_PHONENUMBER, user.phoneNumber()
         );
 
-        return doGenerateToken(extraClaims, user);
+        return doGenerateToken(extraClaims, user,JWT_TOKEN_VALIDITY * 1000);
     }
 
     //while creating the token -
@@ -85,12 +88,12 @@ public class JwtUtils {
     //2. Sign the JWT using the HS512 algorithm and secret key.
     //3. According to JWS Compact Serialization(https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41#section-3.1)
     //   compaction of the JWT to a URL-safe string
-    private String doGenerateToken(final Map<String, Object> claims, final UserDto user) {
+    private String doGenerateToken(final Map<String, Object> claims, final UserDto user, final long expirationTime) {
         return Jwts.builder()
                 .claims(claims)
                 .subject(user.username())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
+                .expiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(getSecretKey())
                 .compact();
     }
@@ -99,5 +102,19 @@ public class JwtUtils {
     public Boolean validateToken(final String token, final UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    public String generateRefreshToken(final UserDto user) {
+        final Map<String, Object> extraClaims = Map.of(
+                USER_TYPE, user.role(),
+                USER_LOGIN, user.username(),
+                USER_UUID, user.userUuid(),
+                USER_EMAIL, user.email(),
+                ACCOUNT_ENABLED, user.isActive(),
+                USER_FIRSTNAME, user.firstname(),
+                USER_SURNAME, user.surname(),
+                USER_PHONENUMBER, user.phoneNumber()
+        );
+        return doGenerateToken(extraClaims, user,JWT_REFRESH_TOKEN_VALIDITY);
     }
 }

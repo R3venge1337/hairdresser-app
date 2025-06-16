@@ -1,0 +1,28 @@
+.hairdresser-list-card {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-container {
+    overflow-x: auto;
+    /* Działa na małych ekranach */
+}
+
+table {
+    width: 100%;
+}
+
+/* Styl dla wiersza, gdy nie ma danych */
+.mat-no-data-row {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+}
+
+/* Opcjonalnie: wyrównanie kolumn, jeśli potrzebujesz */
+.mat-column-actions {
+    text-align: right;
+    padding-right: 16px;
+}

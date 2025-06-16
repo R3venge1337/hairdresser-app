@@ -1,0 +1,33 @@
+.full-width-field {
+    width: 100%;
+}
+
+.slots-container {
+    margin-top: 20px;
+    max-height: 250px;
+    /* Ogranicz wysokość, aby pojawił się scroll */
+    overflow-y: auto;
+    padding-right: 10px;
+    /* Zapobiegaj zakrywaniu scrollbara */
+}
+
+.slots-container h3 {
+    margin-bottom: 10px;
+    color: #3f51b5;
+}
+
+.slot-option {
+    display: block;
+    /* Każdy slot w nowej linii */
+    margin-bottom: 8px;
+}
+
+.loading-spinner,
+.no-slots-message {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.no-slots-message p {
+    color: #777;
+}

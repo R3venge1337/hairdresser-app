@@ -24,6 +24,7 @@ import java.util.UUID;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtUtils jwtTokenUtil;
+    private final TokenRepository tokenRepository;
 
 
     @Override
@@ -55,8 +56,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             final JWTBodyAttributes attributes = new JWTBodyAttributes(userUuid, firstname, surname, userPhoneNumber, username, userEmail, accountEnabled, userRole);
 
+            var isTokenValid = tokenRepository.findByToken(jwt)
+                    .map(t -> !t.isExpired() && !t.isRevoked())
+                    .orElse(false);
 
-            if (!jwtTokenUtil.isTokenExpired(jwt)) {
+            if (!jwtTokenUtil.isTokenExpired(jwt) && isTokenValid) {
                 final UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(createJwtBody(attributes), null, List.of(new SimpleGrantedAuthority(userRole)));
 

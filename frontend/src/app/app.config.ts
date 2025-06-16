@@ -7,10 +7,12 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import {
   HttpClient,
   provideHttpClient,
-  withInterceptorsFromDi,
+  withInterceptors,
 } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
+import { authInterceptor } from './interceptors/auth.interceptor';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 // Factory function for the TranslateHttpLoader
 export function httpLoaderFactory(http: HttpClient) {
@@ -24,7 +26,7 @@ export const appConfig: ApplicationConfig = {
     provideToastr(),
     provideAnimationsAsync(),
     provideNoopAnimations(),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideTranslateService({
       loader: {
         provide: TranslateLoader,
@@ -33,5 +35,6 @@ export const appConfig: ApplicationConfig = {
       },
       defaultLanguage: 'pl', // Set the default language
     }),
+    provideNativeDateAdapter(),
   ],
 };

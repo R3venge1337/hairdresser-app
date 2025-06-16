@@ -1,0 +1,62 @@
+/* assign-appointment.component.css */
+
+.booking-form-card {
+    max-width: 500px;
+    /* Ogranicz szerokość formularza */
+    margin: 20px auto;
+    /* Wyśrodkuj na stronie */
+    padding: 20px;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Odstęp między polami formularza */
+}
+
+.full-width {
+    width: 100%;
+}
+
+.generate-slots-button-container {
+    display: flex;
+    justify-content: center;
+    /* Wyrównaj przycisk do prawej */
+    margin-top: 10px;
+    /* Odstęp od poprzedniego elementu */
+}
+
+.available-slots-section {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    /* Wyrównaj przyciski do prawej */
+    gap: 10px;
+    /* Odstęp między przyciskami */
+    margin-top: 20px;
+    /* Odstęp od reszty formularza */
+}
+
+/* Możesz dodać style dla wiadomości o błędach i informacji */
+mat-error {
+    font-size: 0.8em;
+    color: #f44336;
+}
+
+p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+}

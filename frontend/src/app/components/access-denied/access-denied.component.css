@@ -1,0 +1,87 @@
+.access-denied-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px);
+    /* Dopasuj wysokość, uwzględniając nagłówek/stopkę */
+    background-color: #f5f5f5;
+    /* Jasne tło */
+    padding: 20px;
+}
+
+.denied-card {
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    /* Większy cień */
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.denied-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.denied-icon {
+    font-size: 72px;
+    /* Duża ikona */
+    height: 72px;
+    width: 72px;
+    margin-bottom: 10px;
+    color: #f44336;
+    /* Czerwony kolor Material Design */
+}
+
+.denied-title {
+    font-size: 2.2em;
+    color: #3f51b5;
+    /* Główny kolor Material Design */
+    font-weight: 500;
+    margin-top: 0;
+}
+
+.denied-content p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.denied-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    /* Odstęp między przyciskami */
+    margin-top: 30px;
+}
+
+/* Responsywność dla małych ekranów */
+@media (max-width: 600px) {
+    .denied-card {
+        padding: 20px;
+    }
+
+    .denied-title {
+        font-size: 1.8em;
+    }
+
+    .denied-content p {
+        font-size: 1em;
+    }
+
+    .denied-actions {
+        flex-direction: column;
+        /* Przyciski w kolumnie */
+        align-items: center;
+    }
+
+    .denied-actions button {
+        width: 80%;
+        /* Przyciski zajmują więcej szerokości */
+    }
+}

@@ -1,0 +1,117 @@
+<div>
+    <h2>{{ 'hairOffers.title' | translate }}</h2>
+
+    <mat-form-field appearance="fill">
+        <mat-label>{{ 'hairOffers.filters.name' | translate }}</mat-label>
+        <input matInput [(ngModel)]="filterForm.name"
+            [placeholder]="'hairOffers.filters.placeholders.enterName' | translate" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>{{ 'hairOffers.filters.priceLow' | translate }}</mat-label>
+        <input matInput type="number" [(ngModel)]="filterForm.priceLow"
+            [placeholder]="'hairOffers.filters.placeholders.enterMinPrice' | translate" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>{{ 'hairOffers.filters.priceHigh' | translate }}</mat-label>
+        <input matInput type="number" [(ngModel)]="filterForm.priceHigh"
+            [placeholder]="'hairOffers.filters.placeholders.enterMaxPrice' | translate" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>{{ 'hairOffers.filters.durationLow' | translate }}</mat-label>
+        <input matInput type="number" [(ngModel)]="filterForm.durationLow"
+            [placeholder]="'hairOffers.filters.placeholders.enterMinDuration' | translate" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>{{ 'hairOffers.filters.durationHigh' | translate }}</mat-label>
+        <input matInput type="number" [(ngModel)]="filterForm.durationHigh"
+            [placeholder]="'hairOffers.filters.placeholders.enterMaxDuration' | translate" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="applyFilters()">
+        {{ 'hairOffers.filters.applyButton' | translate }}
+    </button>
+
+    <button mat-raised-button color="accent" (click)="showAddOfferForm = !showAddOfferForm">
+        {{ 'hairOffers.addOffer.button' | translate }}
+    </button>
+
+    <div *ngIf="showAddOfferForm" style="margin-top: 16px;">
+        <h3>{{ 'hairOffers.addOffer.formTitle' | translate }}</h3>
+        <form (ngSubmit)="addHairoffer()" style="display: flex; flex-direction: row; gap: 16px;">
+            <mat-form-field appearance="fill">
+                <mat-label>{{ 'hairOffers.addOffer.name' | translate }}</mat-label>
+                <input matInput [(ngModel)]="newOffer.name" name="name" required />
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>{{ 'hairOffers.addOffer.description' | translate }}</mat-label>
+                <input matInput [(ngModel)]="newOffer.description" name="description" required />
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>{{ 'hairOffers.addOffer.price' | translate }}</mat-label>
+                <input matInput type="number" [(ngModel)]="newOffer.price" name="price" required />
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>{{ 'hairOffers.addOffer.duration' | translate }}</mat-label>
+                <input matInput type="number" [(ngModel)]="newOffer.duration" name="duration" required />
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit">{{ 'hairOffers.addOffer.addButton' | translate
+                }}</button>
+            <button mat-button (click)="showAddOfferForm = false">{{ 'hairOffers.addOffer.cancelButton' | translate
+                }}</button>
+        </form>
+    </div>
+
+    <h3>{{ 'hairOffers.availableOffers.title' | translate }}</h3>
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> {{
+                'hairOffers.availableOffers.tableHeaders.name' | translate }} </th>
+            <td mat-cell *matCellDef="let offer"> {{ offer.name }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> {{ 'hairOffers.availableOffers.tableHeaders.description' | translate
+                }} </th>
+            <td mat-cell *matCellDef="let offer"> {{ offer.description }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="price"> {{
+                'hairOffers.availableOffers.tableHeaders.price' | translate }} </th>
+            <td mat-cell *matCellDef="let offer"> {{ offer.price.toString() }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="duration">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="duration"> {{
+                'hairOffers.availableOffers.tableHeaders.duration' | translate }} </th>
+            <td mat-cell *matCellDef="let offer"> {{ offer.duration }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> {{ 'hairOffers.availableOffers.tableHeaders.actions' | translate }}
+            </th>
+
+            <td mat-cell *matCellDef="let offer">
+                <ng-container *ngIf="authService.hasAnyRole(['ADMIN', 'HAIRDRESSER'])">
+                    <button mat-icon-button routerLink='/edit-hairoffer/{{offer.id}}'>
+                        <mat-icon>edit_square</mat-icon>
+                    </button>
+                </ng-container>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['name', 'description', 'price', 'duration', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['name', 'description', 'price', 'duration', 'actions'];"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"
+        #paginator>
+    </mat-paginator>
+</div>

@@ -60,6 +60,9 @@ class Appointment extends AbstractUuidEntity {
     @Column(name = "booked_date")
     private LocalDateTime bookedDate;
 
+    @Column(name = "finished_appointment_date")
+    private LocalDateTime finishedAppointmentDate;
+
     public void addHairOffer(HairOffer hairOffer) {
         hairOffers.add(hairOffer);
     }

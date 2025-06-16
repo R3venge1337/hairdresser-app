@@ -4,3 +4,11 @@ export interface PageableRequest {
   sortField: String;
   sortDirection: string;
 }
+
+export interface PageDto<T> {
+  content: T[];
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
+}

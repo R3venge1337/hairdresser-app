@@ -37,11 +37,10 @@ export class HeaderComponent implements OnInit {
     this.authService.checkLoginStatus();
 
     if (this.authService.isLoggedIn()) {
-      const token = localStorage.getItem('token');
-      if (token) {
-        const decoded: any = jwtDecode(token);
-        this.username = decoded.userLogin;
-        this.userRole = decoded.userType;
+      const decodedToken = this.authService.getDecodedToken();
+      if (decodedToken) {
+        this.username = decodedToken.userLogin;
+        this.userRole = decodedToken.userType;
       }
     } else {
       this.username = null;

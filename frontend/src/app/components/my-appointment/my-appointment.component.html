@@ -1,0 +1,189 @@
+<mat-card class="appointments-history-card">
+    <mat-card-header>
+        <mat-card-title>{{"my-appointments.card-title" |
+            translate}}</mat-card-title>
+        <mat-card-subtitle>{{"my-appointments.card-sub-title" |
+            translate}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div class="filters-container">
+            <mat-form-field appearance="outline" class="filter-field">
+                <mat-label>Status</mat-label>
+                <mat-select [ngModel]="filterForm().status"
+                    (selectionChange)="updateFilterField('status', $event.value)">
+                    <mat-option [value]="null">{{"my-appointments.filters.status" |
+                        translate}}</mat-option>
+                    <mat-option *ngFor="let status of availableStatuses" [value]="status">{{ status }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="filter-field">
+                <mat-label>{{"my-appointments.filters.hairdresser-firstname" |
+                    translate}}</mat-label>
+                <input matInput [ngModel]="filterForm().hairdresserName"
+                    (ngModelChange)="updateFilterField('hairdresserName', $event)" (keyup.enter)="applyFilters()">
+                <button *ngIf="filterForm().hairdresserName" matSuffix mat-icon-button
+                    (click)="updateFilterField('hairdresserName', null)">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="filter-field">
+                <mat-label>{{"my-appointments.filters.hairdresser-surname" |
+                    translate}}</mat-label>
+                <input matInput [ngModel]="filterForm().hairdresserSurname"
+                    (ngModelChange)="updateFilterField('hairdresserSurname', $event)" (keyup.enter)="applyFilters()">
+                <button *ngIf="filterForm().hairdresserSurname" matSuffix mat-icon-button
+                    (click)="updateFilterField('hairdresserSurname', null)">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="filter-field">
+                <mat-label>{{"my-appointments.filters.start-date" |
+                    translate}}</mat-label>
+                <input matInput [matDatepicker]="pickerStart" [ngModel]="filterForm().bookedDateStart"
+                    (dateChange)="updateFilterField('bookedDateStart', $event.value)">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStart></mat-datepicker>
+                <button *ngIf="filterForm().bookedDateStart" matSuffix mat-icon-button
+                    (click)="updateFilterField('bookedDateStart', null)">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="filter-field">
+                <mat-label>{{"my-appointments.filters.end-date" |
+                    translate}}</mat-label>
+                <input matInput [matDatepicker]="pickerEnd" [ngModel]="filterForm().bookedDateEnd"
+                    (dateChange)="updateFilterField('bookedDateEnd', $event.value)">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                <mat-datepicker #pickerEnd></mat-datepicker>
+                <button *ngIf="filterForm().bookedDateEnd" matSuffix mat-icon-button
+                    (click)="updateFilterField('bookedDateEnd', null)">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <div class="filter-buttons">
+                <!-- <button mat-raised-button color="primary" (click)="applyFilters()">
+                    <mat-icon>search</mat-icon> {{"my-appointments.filters.button-apply-filters" |
+                    translate}}
+                </button> -->
+                <button mat-raised-button color="warn" (click)="clearFilters()">
+                    <mat-icon>clear</mat-icon> {{"my-appointments.filters.button-clear-filters" |
+                    translate}}
+                </button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table mat-table [dataSource]="dataSource" matSort [matSortActive]="currentSortActive()"
+                [matSortDirection]="currentSortDirection()" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> {{"my-appointments.table-label-id" |
+                        translate}} </th>
+                    <td mat-cell *matCellDef="let appointment"> {{ appointment.appointmentUuid | slice:0:8 }}... </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="hairdresser">
+                    <th mat-header-cell *matHeaderCellDef>
+                        {{"my-appointments.table-label-hairdresser" |
+                        translate}} </th>
+                    <td mat-cell *matCellDef="let appointment"> {{ appointment.hairDresserFirstname }} {{
+                        appointment.hairDresserSurname
+                        }} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="bookedDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="bookedDate">
+                        {{"my-appointments.table-label-datetime" |
+                        translate}} </th>
+                    <td mat-cell *matCellDef="let appointment"> {{ appointment.bookedAppointment
+                        | date:'medium' }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="totalCost">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="totalCost">
+                        {{"my-appointments.table-label-cost" |
+                        translate}} </th>
+                    <td mat-cell *matCellDef="let appointment"> {{ appointment.totalCost |
+                        currency:'PLN':'symbol':'1.2-2' }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="status">
+                        {{"my-appointments.table-label-status" |
+                        translate}} </th>
+                    <td mat-cell *matCellDef="let appointment"
+                        [ngClass]="'status-' + appointment.appointmentStatus.toLowerCase()">
+                        {{ appointment.appointmentStatus}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="services">
+                    <th mat-header-cell *matHeaderCellDef> {{"my-appointments.table-label-services" |
+                        translate}} </th>
+                    <td mat-cell *matCellDef="let appointment"> {{ getServicesString(appointment) }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> {{"my-appointments.table-label-actions" | translate}} </th>
+                    <td mat-cell *matCellDef="let appointment" class="action-column">
+
+                        <!-- Akcje dla fryzjera -->
+                        <ng-container *ngIf="authService.hasAnyRole(['HAIRDRESSER'])">
+                            <button mat-icon-button color="primary"
+                                *ngIf="appointment.appointmentStatus === 'CREATED' || appointment.appointmentStatus === 'RESCHEDULED'"
+                                (click)="acceptAppointment(appointment.appointmentUuid)"
+                                [title]="'my-appointments.actions.accept' | translate">
+                                <mat-icon>check_circle</mat-icon>
+                            </button>
+                            <button mat-icon-button color="warn"
+                                *ngIf="appointment.appointmentStatus === 'CREATED'  || appointment.appointmentStatus === 'RESCHEDULED'"
+                                (click)="cancelAppointment(appointment.appointmentUuid)"
+                                [title]="'my-appointments.actions.cancel' | translate">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </ng-container>
+
+                        <!-- Akcje dla klienta -->
+                        <ng-container *ngIf="authService.hasAnyRole(['CUSTOMER'])">
+                            <button mat-icon-button color="accent"
+                                *ngIf="appointment.appointmentStatus === 'CREATED' || appointment.appointmentStatus === 'ACCEPTED' || appointment.appointmentStatus === 'RESCHEDULED'"
+                                (click)="changeAppointmentDate(appointment)"
+                                [title]="'my-appointments.actions.changeTerm' | translate">
+                                <mat-icon>edit_calendar</mat-icon>
+                            </button>
+                            <button mat-icon-button color="primary"
+                                *ngIf="appointment.appointmentStatus === 'COMPLETED'"
+                                (click)="makePayment(appointment.appointmentUuid)"
+                                [title]="'my-appointments.actions.makePayment' | translate">
+                                <mat-icon>payment</mat-icon>
+                            </button>
+                        </ng-container>
+
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" [attr.colspan]="displayedColumns.length">{{"my-appointments.empty-list" |
+                        translate}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <mat-paginator [length]="totalElements()" [pageSize]="pageSize()" [pageSizeOptions]="pageSizeOptions"
+            [pageIndex]="currentPage()" aria-label="Select page of appointments" (page)="onPageChange($event)">
+        </mat-paginator>
+
+    </mat-card-content>
+</mat-card>

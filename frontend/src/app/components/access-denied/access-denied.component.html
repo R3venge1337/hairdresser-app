@@ -1,0 +1,17 @@
+<div class="access-denied-container">
+    <mat-card class="denied-card">
+        <mat-card-header class="denied-header">
+            <mat-icon color="warn" class="denied-icon">security</mat-icon>
+            <mat-card-title class="denied-title">{{ 'accessDenied.title' | translate }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="denied-content">
+            <p>{{ 'accessDenied.message1' | translate }}</p>
+            <p>{{ 'accessDenied.message2' | translate }}</p>
+        </mat-card-content>
+        <mat-card-actions class="denied-actions">
+            <button mat-raised-button color="primary" (click)="goToHome()">{{ 'accessDenied.buttons.goToHome' |
+                translate }}</button>
+            <button mat-button (click)="goToLogin()">{{ 'accessDenied.buttons.goToLogin' | translate }}</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

@@ -1,0 +1,85 @@
+<div class="profile-container">
+    <mat-card class="profile-card">
+        <mat-card-header>
+            <mat-card-title class="profile-title">{{ 'userProfileDashboard.title' | translate }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div *ngIf="isLoading" class="loading-spinner">
+                <mat-spinner diameter="50"></mat-spinner>
+                <p>{{ 'userProfileDashboard.loading' | translate }}</p>
+            </div>
+
+            <div *ngIf="error" class="error-message">
+                <mat-icon color="warn">error</mat-icon>
+                <p>{{ error }}</p>
+            </div>
+
+            <div *ngIf="userProfile && !isLoading && !error" class="user-details">
+                <mat-list>
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>person</mat-icon>
+                        <div matListItemTitle><strong>{{ 'userProfileDashboard.details.userUuid' | translate
+                                }}</strong></div>
+                        <div matListItemLine>
+                            {{ userProfile.userUuid }}
+                        </div>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>person</mat-icon>
+                        <div matListItemTitle><strong>{{ 'userProfileDashboard.details.firstNameSurname' | translate
+                                }}</strong></div>
+                        <div matListItemLine>
+                            {{ userProfile.firstname }} {{ userProfile.surname }}
+                        </div>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>phone</mat-icon>
+                        <div matListItemTitle><strong>{{ 'userProfileDashboard.details.phoneNumber' | translate
+                                }}</strong></div>
+                        <div matListItemLine>{{ userProfile.phoneNumber }}</div>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>account_circle</mat-icon>
+                        <div matListItemTitle><strong>{{ 'userProfileDashboard.details.username' | translate }}</strong>
+                        </div>
+                        <div matListItemLine>{{ userProfile.username }}</div>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>email</mat-icon>
+                        <div matListItemTitle><strong>{{ 'userProfileDashboard.details.email' | translate }}</strong>
+                        </div>
+                        <div matListItemLine>{{ userProfile.email }}</div>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>calendar_today</mat-icon>
+                        <div matListItemTitle><strong>{{ 'userProfileDashboard.details.createdAt' | translate
+                                }}</strong></div>
+                        <div matListItemLine>
+                            {{ userProfile.createdDate | date : 'medium' }}
+                        </div>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>check_circle</mat-icon>
+                        <div matListItemTitle><strong>{{ 'userProfileDashboard.details.active' | translate }}</strong>
+                        </div>
+                        <div matListItemLine>
+                            {{ userProfile.isActive ? ('userProfileDashboard.details.isActiveYes' | translate) :
+                            ('userProfileDashboard.details.isActiveNo' | translate) }}
+                        </div>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>work</mat-icon>
+                        <div matListItemTitle><strong>{{ 'userProfileDashboard.details.role' | translate }}</strong>
+                        </div>
+                        <div matListItemLine>{{ userProfile.name }}</div>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+
+            <div *ngIf="!userProfile && !isLoading && !error" class="no-data-message">
+                <p>{{ 'userProfileDashboard.noData' | translate }}</p>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

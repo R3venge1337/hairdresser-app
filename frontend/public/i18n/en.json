@@ -2,7 +2,12 @@
   "app-title": "Hairdresser",
   "welcome-user": "Hello",
   "navbar": {
-    "appointments": "Appointments",
+    "users": "Users",
+    "stats": "Statistics",
+    "all-appointments": "All appointments",
+    "hairdressers": "Hairdressers",
+    "my-appointments": "My appointments",
+    "appointments": "Assign Appointment",
     "hairoffers": "Hairoffers"
   },
   "roles": {
@@ -63,5 +68,231 @@
       "email-format": "Email is not in a valid form",
       "phone": "Phone is required."
     }
+  },
+  "hairdresser": {
+    "card-title": "Hairdresser List",
+    "id": "ID",
+    "name": "Name",
+    "surname": "Surname",
+    "phone": "Phone",
+    "empty-list": "No hairdressers found"
+  },
+  "my-appointments": {
+    "card-title": "My appointments",
+    "card-sub-title": "View your past and upcoming appointments",
+    "filters": {
+      "status": "All Statuses",
+      "hairdresser-firstname": "Hairdresser First Name",
+      "hairdresser-surname": "Hairdresser Last Name",
+      "start-date": "Appointment Start Date",
+      "end-date": "Appointment End Date",
+      "button-apply-filters": "Apply Filters",
+      "button-clear-filters": "Clear Filters"
+    },
+    "table-label-id": "ID",
+    "table-label-customer": "Client",
+    "table-label-hairdresser": "Hairdresser",
+    "table-label-datetime": "Date & Time",
+    "table-label-cost": "Cost",
+    "table-label-status": "Status",
+    "table-label-services": "Services",
+    "table-label-actions": "Actions",
+    "empty-list": "No appointments found matching your criteria.",
+    "error-loading": "Failed to load appointments.",
+    "actions": {
+      "accept": "Accept appointment",
+      "cancel": "Cancel appointment",
+      "changeTerm": "Change appointment term",
+      "makePayment": "Make payment"
+    },
+    "confirm-accept": "Are you sure you want to accept this appointment?",
+    "confirm-cancel": "Are you sure you want to cancel this appointment?",
+    "accept-success": "Appointment accepted successfully!",
+    "accept-error": "Error accepting appointment.",
+    "cancel-success": "Appointment canceled successfully!",
+    "cancel-error": "Error canceling appointment.",
+    "change-date-feature": "The change term feature will be opened in a new window.",
+    "payment-process": "Initiating payment process..."
+  },
+  "all-appointments": {
+    "card-title": "All appointments",
+    "card-sub-title": "View all past and upcoming appointments",
+    "filters": {
+      "status": "All Statuses",
+      "hairdresser-firstname": "Hairdresser First Name",
+      "hairdresser-surname": "Hairdresser Last Name",
+      "start-date": "Appointment Start Date",
+      "end-date": "Appointment End Date",
+      "button-apply-filters": "Apply Filters",
+      "button-clear-filters": "Clear Filters"
+    },
+    "table-label-id": "ID",
+    "table-label-customer": "Client",
+    "table-label-hairdresser": "Hairdresser",
+    "table-label-datetime": "Date & Time",
+    "table-label-cost": "Cost",
+    "table-label-status": "Status",
+    "table-label-services": "Services",
+    "empty-list": "No appointments found matching your criteria."
+  },
+  "appointment-status-chart": {
+    "title": "Appointments by Status",
+    "no-data": "No appointment data available for this chart."
+  },
+  "hair-offer-chart": {
+    "title": "Hairoffers counts",
+    "no-data": "No appointment data available for this chart."
+  },
+  "dashboard.title": "Statistics",
+  "userProfileDashboard": {
+    "title": "User Profile",
+    "loading": "Loading profile...",
+    "errors": {
+      "noUuid": "Missing user ID in URL.",
+      "fetchFailed": "Failed to load user profile. Please try again later."
+    },
+    "details": {
+      "userUuid": "ID",
+      "firstNameSurname": "First Name & Surname:",
+      "phoneNumber": "Phone Number:",
+      "username": "Username:",
+      "email": "Email:",
+      "createdAt": "Created At:",
+      "active": "Active:",
+      "role": "Role:",
+      "isActiveYes": "Yes",
+      "isActiveNo": "No"
+    },
+    "noData": "No profile data to display.",
+    "toastMessages": {
+      "loadSuccess": "User profile loaded successfully.",
+      "noUuidError": "Missing user ID. Please log in again.",
+      "loadError": "Failed to load user profile."
+    }
+  },
+  "hairOffers": {
+    "title": "Hair Offers",
+    "filters": {
+      "name": "Name",
+      "priceLow": "Price Low",
+      "priceHigh": "Price High",
+      "durationLow": "Duration Low",
+      "durationHigh": "Duration High",
+      "applyButton": "Apply Filters",
+      "placeholders": {
+        "enterName": "Enter name",
+        "enterMinPrice": "Enter minimum price",
+        "enterMaxPrice": "Enter maximum price",
+        "enterMinDuration": "Enter minimum duration",
+        "enterMaxDuration": "Enter maximum duration"
+      }
+    },
+    "addOffer": {
+      "button": "Add New Offer",
+      "formTitle": "Add New Hair Offer",
+      "name": "Name",
+      "description": "Description",
+      "price": "Price",
+      "duration": "Duration",
+      "addButton": "Add Offer",
+      "cancelButton": "Cancel"
+    },
+    "availableOffers": {
+      "title": "Available Offers",
+      "tableHeaders": {
+        "name": "Name",
+        "description": "Description",
+        "price": "Price",
+        "duration": "Duration",
+        "actions": "Actions"
+      },
+      "pagination": {
+        "ariaLabel": "Select page of periodic elements"
+      }
+    }
+  },
+  "userList": {
+    "title": "User List",
+    "loading": "Loading user list...",
+    "errors": {
+      "fetchFailed": "Failed to load user list. Please try again later."
+    },
+    "tableHeaders": {
+      "id": "ID",
+      "firstName": "First Name",
+      "surname": "Surname",
+      "email": "Email",
+      "role": "Role",
+      "active": "Active",
+      "actions": "Actions"
+    },
+    "activeYes": "Yes",
+    "activeNo": "No",
+    "buttons": {
+      "viewDetailsAriaLabel": "View user profile details"
+    },
+    "noData": "No user data to display.",
+    "pagination": {
+      "ariaLabel": "Select page of periodic elements"
+    },
+    "toastMessages": {
+      "loadSuccess": "User list loaded successfully.",
+      "loadError": "Failed to load user list."
+    }
+  },
+  "accessDenied": {
+    "title": "Access Denied",
+    "message1": "You do not have the required permissions to access this page.",
+    "message2": "If you believe this is a mistake, please contact the system administrator.",
+    "buttons": {
+      "goToHome": "Go to Home Page",
+      "goToLogin": "Log in again"
+    }
+  },
+  "changeAppointmentDialog": {
+    "title": "Change Appointment Term",
+    "currentAppointmentInfo": "Current appointment details:",
+    "hairdresser": "Hairdresser",
+    "currentDate": "Current Date",
+    "totalCost": "Total Cost",
+    "services": "Services",
+    "selectNewDate": "Select new date",
+    "loadingSlots": "Loading available slots...",
+    "availableSlots": "Available Slots",
+    "noSlotsMessage": "No available slots for the selected date and hairdresser.",
+    "cancel": "Cancel",
+    "confirm": "Confirm Change",
+    "selectDateWarning": "Please select a date.",
+    "selectSlotWarning": "Please select an available slot.",
+    "errorLoadingSlots": "Error loading available slots.",
+    "rescheduleSuccess": "Appointment term changed successfully!",
+    "rescheduleError": "Error rescheduling appointment."
+  },
+  "calendar": {
+    "monthYearFormat": "{{month}}, {{year}}",
+    "todayButton": "Today",
+    "weekDays": {
+      "pon": "Mon",
+      "wt": "Tue",
+      "śr": "Wed",
+      "czw": "Thu",
+      "pt": "Fri",
+      "sob": "Sat",
+      "nd": "Sun"
+    },
+    "dailyAppointmentsTitle": "Daily Appointments for {{date}}",
+    "dailyAppointmentsGenericTitle": "Daily Appointments",
+    "tableHeaders": {
+      "time": "Time",
+      "customer": "Customer",
+      "hairdresser": "Hairdresser",
+      "services": "Services",
+      "totalCost": "Total Cost",
+      "status": "Status"
+    },
+    "noAppointmentsForDate": "No appointments found for the selected date.",
+    "selectDayToViewAppointments": "Please select a day to view appointments.",
+    "bookAppointmentButton": "Book an Appointment",
+    "selectDayToBookNew": "Please select a day to book a new one."
   }
 }
