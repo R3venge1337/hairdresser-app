@@ -1,0 +1,62 @@
+<mat-card class="booking-form-card">
+  <mat-card-header>
+    <mat-card-title>Zarezerwuj Nowe Spotkanie na {{ selectedDate.toISODate() }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="bookingForm">
+      <div class="form-fields">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Wybierz usługi*</mat-label>
+          <mat-select formControlName="selectedServices" multiple required>
+            <mat-option *ngFor="let service of hairoffers()" [value]="service.id">
+              {{ service.name }} ({{ service.duration }} min)
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="bookingForm.get('selectedServices')?.hasError('required') && bookingForm.get('selectedServices')?.touched">
+            Proszę wybrać przynajmniej jedną usługę.
+          </mat-error>
+        </mat-form-field>
+
+        <p *ngIf="selectedServicesTotalDuration() > 0">Całkowity czas trwania: <strong>{{
+            selectedServicesTotalDuration() }} minut</strong></p>
+
+        <div class="generate-slots-button-container">
+          <button mat-raised-button color="primary" type="button"
+            [disabled]="bookingForm.get('selectedServices')?.invalid || selectedServicesTotalDuration() === 0"
+            (click)="generateAvailableSlots()">
+            Generuj Dostępne Terminy
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="availableSlots().length > 0" class="available-slots-section">
+        <h3>Wybierz Dostępny Termin:</h3>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Dostępne sloty*</mat-label>
+          <mat-select formControlName="selectedSlot" required>
+            <mat-option *ngFor="let slot of availableSlots()" [value]="slot">
+              {{ slot.startTime }} - {{ slot.endTime }} z {{ slot.hairdresserName }} {{ slot.hairdresserSurname }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="bookingForm.get('selectedSlot')?.hasError('required') && bookingForm.get('selectedSlot')?.touched">
+            Proszę wybrać dostępny termin.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <!-- 
+      <p
+        *ngIf="bookingForm.get('selectedServices')?.valid && selectedServicesTotalDuration() > 0 && availableSlots().length === 0">
+        Brak dostępnych terminów dla wybranych kryteriów.
+      </p> -->
+
+      <div class="form-actions">
+        <button mat-raised-button color="accent" type="submit" [disabled]="bookingForm.invalid" (click)="onSubmit()">
+          Potwierdź Rezerwację
+        </button>
+        <button mat-button type="button" (click)="onCancel()">Anuluj</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,8 @@
+<div class="language-switcher">
+    <button mat-icon-button (click)="switchLanguage('pl')" [class.active-lang]="translateService.currentLang === 'pl'">
+        <span class="fi fi-pl"></span>
+    </button>
+    <button mat-icon-button (click)="switchLanguage('en')" [class.active-lang]="translateService.currentLang === 'en'">
+        <span class="fi fi-gb"></span>
+    </button>
+</div>

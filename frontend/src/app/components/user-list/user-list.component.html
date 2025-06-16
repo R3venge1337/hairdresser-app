@@ -1,0 +1,97 @@
+<div class="user-list-container">
+    <mat-card class="user-list-card">
+        <mat-card-header>
+            <mat-card-title class="list-title">{{ 'userList.title' | translate }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div *ngIf="isLoading" class="loading-spinner">
+                <mat-spinner diameter="50"></mat-spinner>
+                <p>{{ 'userList.loading' | translate }}</p>
+            </div>
+
+            <div *ngIf="error" class="error-message">
+                <mat-icon color="warn">error</mat-icon>
+                <p>{{ error }}</p>
+            </div>
+
+            <div *ngIf="!isLoading && !error && dataSource.data.length > 0" class="table-container">
+                <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)"
+                    class="mat-elevation-z8">
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> {{
+                            'userList.tableHeaders.id' | translate }} </th>
+                        <td mat-cell *matCellDef="let user"> {{ user.userUuid }} </td>
+                    </ng-container>
+                    <!-- First Name Column -->
+                    <ng-container matColumnDef="firstName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header="firstname"> {{
+                            'userList.tableHeaders.firstName' | translate }} </th>
+                        <td mat-cell *matCellDef="let user"> {{ user.firstname }} </td>
+                    </ng-container>
+
+                    <!-- Surname Column -->
+                    <ng-container matColumnDef="surname">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header="surname"> {{
+                            'userList.tableHeaders.surname' | translate }} </th>
+                        <td mat-cell *matCellDef="let user"> {{ user.surname }} </td>
+                    </ng-container>
+
+                    <!-- Email Column -->
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header="appointmentAccount.email"> {{
+                            'userList.tableHeaders.email'
+                            | translate }} </th>
+                        <td mat-cell *matCellDef="let user"> {{ user.email }} </td>
+                    </ng-container>
+
+                    <!-- Role Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header="appointmentAccount.appointmentRole.name">
+                            {{
+                            'userList.tableHeaders.role' |
+                            translate }} </th>
+                        <td mat-cell *matCellDef="let user"> {{ user.name }} </td>
+                    </ng-container>
+
+                    <!-- Is Active Column -->
+                    <ng-container matColumnDef="isActive">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header="appointmentAccount.isActive"> {{
+                            'userList.tableHeaders.active' | translate }} </th>
+                        <td mat-cell *matCellDef="let user"> {{ user.isActive ? ('userList.activeYes' | translate) :
+                            ('userList.activeNo' | translate) }} </td>
+                    </ng-container>
+
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions" *ngIf="authService.hasAnyRole(['CUSTOMER'])">
+                        <th mat-header-cell *matHeaderCellDef> {{ 'userList.tableHeaders.actions' | translate }} </th>
+                        <td mat-cell *matCellDef="let user">
+                            <button mat-icon-button (click)="viewUserProfileDetails(user.uuid)"
+                                [attr.aria-label]="'userList.buttons.viewDetailsAriaLabel' | translate">
+                                <mat-icon>visibility</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <!-- Message for no data in table -->
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="6">{{ 'userList.noData' | translate }}</td>
+                    </tr>
+                </table>
+
+                <!-- MatPaginator linked to the component's properties and event handler -->
+                <mat-paginator [length]="totalElements()" [pageSize]="pageSize()" [pageSizeOptions]="pageSizeOptions"
+                    [pageIndex]="currentPage()" (page)="onPageChange($event)" showFirstLastButtons
+                    [attr.aria-label]="'userList.pagination.ariaLabel' | translate">
+                </mat-paginator>
+            </div>
+
+            <div *ngIf="!isLoading && !error && dataSource.data.length === 0" class="no-data-message">
+                <p>{{ 'userList.noData' | translate }}</p>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

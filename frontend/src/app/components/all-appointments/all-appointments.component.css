@@ -1,0 +1,84 @@
+.appointments-history-card {
+    max-width: 1200px;
+    /* Zwiększ szerokość, aby zmieścić więcej kolumn i filtrów */
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* Pozwala na zawijanie filtrów na mniejszych ekranach */
+    gap: 16px;
+    /* Odstęp między filtrami */
+    margin-bottom: 20px;
+    align-items: flex-end;
+    /* Wyrównuje pola formularza i przyciski */
+}
+
+.filter-field {
+    flex: 1 1 200px;
+    /* Pozwala polom na elastyczne rozciąganie/zwężanie */
+    min-width: 150px;
+    /* Minimalna szerokość pola */
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+    /* Przesuwa przyciski na prawą stronę, jeśli jest miejsce */
+}
+
+.table-container {
+    overflow-x: auto;
+    /* Pozwala na przewijanie tabeli na małych ekranach */
+}
+
+table {
+    width: 100%;
+}
+
+.mat-column-id {
+    width: 80px;
+    /* Skróć kolumnę ID */
+}
+
+.mat-column-status {
+    width: 120px;
+}
+
+.mat-column-bookedDate {
+    width: 180px;
+}
+
+/* Opcjonalnie: kolory statusów */
+.mat-cell {
+    padding: 8px;
+}
+
+.status-completed {
+    color: green;
+    font-weight: bold;
+}
+
+.status-accepted {
+    color: blue;
+}
+
+.status-rescheduled {
+    color: orange;
+}
+
+.status-canceled {
+    color: red;
+}
+
+.status-created {
+    color: #FF00FF;
+}
+
+.status-paid {
+    color: red;
+}

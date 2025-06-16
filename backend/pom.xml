@@ -32,6 +32,7 @@
         <apachecommonslang>3.17.0</apachecommonslang>
         <jsonwebtoken>0.12.6</jsonwebtoken>
         <jacksonjsr310>2.18.3</jacksonjsr310>
+        <spring.swagger>2.8.8</spring.swagger>
     </properties>
     <dependencies>
         <dependency>
@@ -112,6 +113,12 @@
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jacksonjsr310}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${spring.swagger}</version>
         </dependency>
     </dependencies>
 

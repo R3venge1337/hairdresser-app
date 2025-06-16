@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>{{ 'changeAppointmentDialog.title' | translate }}</h2>
+
+<mat-dialog-content class="mat-typography">
+    <p>{{ 'changeAppointmentDialog.currentAppointmentInfo' | translate }}</p>
+    <p><strong>{{ 'changeAppointmentDialog.hairdresser' | translate }}:</strong> {{ appointment.hairDresserFirstname }}
+        {{ appointment.customerSurname }}</p>
+    <p><strong>{{ 'changeAppointmentDialog.currentDate' | translate }}:</strong> {{ appointment.bookedAppointment |
+        date:'medium' }}</p>
+    <p><strong>{{ 'changeAppointmentDialog.totalCost' | translate }}:</strong> {{ appointment.totalCost |
+        currency:'PLN':'symbol':'1.2-2' }}</p>
+    <p><strong>{{ 'changeAppointmentDialog.services' | translate }}:</strong> {{ getServicesString(appointment) }}</p>
+
+    <mat-form-field appearance="fill" class="full-width-field">
+        <mat-label>{{ 'changeAppointmentDialog.selectNewDate' | translate }}</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" [min]="minDate"
+            (dateChange)="loadAvailableSlots($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div *ngIf="isLoadingSlots()" class="loading-spinner">
+        <mat-spinner diameter="30"></mat-spinner>
+        <p>{{ 'changeAppointmentDialog.loadingSlots' | translate }}</p>
+    </div>
+
+    <div *ngIf="!isLoadingSlots() && availableSlots().length > 0" class="slots-container">
+        <h3>{{ 'changeAppointmentDialog.availableSlots' | translate }}</h3>
+        <mat-radio-group [(ngModel)]="selectedSlot">
+            <mat-radio-button *ngFor="let slot of availableSlots()" [value]="slot" class="slot-option">
+                {{ slot.startTime }} - {{ slot.endTime }}
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div *ngIf="!isLoadingSlots() && selectedDate && availableSlots().length === 0" class="no-slots-message">
+        <p>{{ 'changeAppointmentDialog.noSlotsMessage' | translate }}</p>
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onNoClick()">{{ 'changeAppointmentDialog.cancel' | translate }}</button>
+    <button mat-raised-button color="primary" [disabled]="!selectedSlot" (click)="confirmReschedule()">{{
+        'changeAppointmentDialog.confirm' | translate }}</button>
+</mat-dialog-actions>

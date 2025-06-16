@@ -1,0 +1,129 @@
+<div class="main-container">
+    <div class="content-wrapper">
+        <div class="left-column">
+            <div class="calendar-section">
+                <div class="calendar">
+                    <div class="calendar-headline">
+                        <div class="calendar-headline-month">
+                            {{ 'calendar.monthYearFormat' | translate: {month: firstDayOfActiveMonth().monthShort, year:
+                            firstDayOfActiveMonth().year} }}
+                        </div>
+                        <div class="calendar-headline-controls">
+                            <div class="calendar-headline-control" (click)="goToPreviousMonth()">
+                                «
+                            </div>
+                            <div class="calendar-headline-control calendar-headline-control-today"
+                                (click)="goToToday()">
+                                {{ 'calendar.todayButton' | translate }}
+                            </div>
+                            <div class="calendar-headline-control" (click)="goToNextMonth()">»</div>
+                        </div>
+                    </div>
+                    <div class="calendar-weeks-grid">
+                        @for (weekDay of weekDays(); track $index) {
+                        <div class="calendar-weeks-grid-cell"> {{weekDay.toLowerCase()}} </div>
+                        }
+                    </div>
+                    <div class="calendar-grid">
+                        @for (dayOfMonth of daysOfMonth(); track $index) {
+                        <div [ngClass]="{
+                                'calendar-grid-cell': true,
+                                'calendar-grid-cell-active':
+                                    activeDay()?.toISODate() === dayOfMonth.toISODate(),
+                                'calendar-grid-cell-inactive':
+                                    dayOfMonth.month !== firstDayOfActiveMonth().month
+                            }" (click)="activeDayLuxon.set(dayOfMonth.luxonDate)">
+                            {{ dayOfMonth.day }}
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="schedule-table">
+                @if (activeDay(); as activeDay) {
+                <h2 class="section-title">{{ 'calendar.dailyAppointmentsTitle' | translate: {date:
+                    activeDay.toISODate()} }}</h2>
+                <table mat-table [dataSource]="appointmentsDataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="time">
+                        <th mat-header-cell *matHeaderCellDef>{{ 'calendar.tableHeaders.time' | translate }}</th>
+                        <td mat-cell *matCellDef="let appt">
+                            {{ getAppointmentTime(appt.bookedAppointment) }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="customerName">
+                        <th mat-header-cell *matHeaderCellDef>{{ 'calendar.tableHeaders.customer' | translate }}</th>
+                        <td mat-cell *matCellDef="let appt">
+                            {{ appt.customerFirstname }} {{ appt.customerSurname }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="hairDresserName">
+                        <th mat-header-cell *matHeaderCellDef>{{ 'calendar.tableHeaders.hairdresser' | translate }}</th>
+                        <td mat-cell *matCellDef="let appt">
+                            {{ appt.hairDresserFirstname }} {{ appt.hairDresserSurname }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="serviceName">
+                        <th mat-header-cell *matHeaderCellDef>{{ 'calendar.tableHeaders.services' | translate }}</th>
+                        <td mat-cell *matCellDef="let appt">
+                            {{ getProcedureNames(appt.procedures) }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="totalCost">
+                        <th mat-header-cell *matHeaderCellDef>{{ 'calendar.tableHeaders.totalCost' | translate }}</th>
+                        <td mat-cell *matCellDef="let appt">
+                            {{ appt.totalCost | currency : 'PLN' : 'symbol' : '1.2-2' }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef>{{ 'calendar.tableHeaders.status' | translate }}</th>
+                        <td mat-cell *matCellDef="let appt"
+                            [ngClass]="'status-' + appt.appointmentStatus.toLowerCase()">
+                            {{ appt.appointmentStatus }}
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedAppointmentsColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedAppointmentsColumns"></tr>
+
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="6">
+                            {{ 'calendar.noAppointmentsForDate' | translate }}
+                        </td>
+                    </tr>
+                </table>
+                } @else {
+                <h2 class="section-title">{{ 'calendar.dailyAppointmentsGenericTitle' | translate }}</h2>
+                <div>{{ 'calendar.selectDayToViewAppointments' | translate }}</div>
+                }
+            </div>
+        </div>
+
+        <div class="right-column" *ngIf="authService.hasAnyRole(['CUSTOMER'])">
+            <div class="booking-section">
+                <div class="schedule-header">
+                    @if (activeDay(); as activeDay) {
+                    <button mat-raised-button color="primary" (click)="toggleBookingForm()">
+                        <mat-icon>add</mat-icon> {{ 'calendar.bookAppointmentButton' | translate }}
+                    </button>
+                    } @else {
+                    <div>{{ 'calendar.selectDayToBookNew' | translate }}</div>
+                    }
+                </div>
+
+                @if (showBookingForm()) {
+                <div class="booking-form-container">
+                    <app-assign-appointment [selectedDate]="activeDayLuxon()!"
+                        (bookingCompleted)="handleBookingCompleted()" (cancelBooking)="cancelBookingForm()">
+                    </app-assign-appointment>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

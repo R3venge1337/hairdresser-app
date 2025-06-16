@@ -2,18 +2,48 @@
     <mat-toolbar class="header">
         <div class="logo-container">
             <img src="logo.jpg" alt="Logo" class="logo" />
-            <span class="app-title">Salon Fryzjerski</span>
+            <span class="app-title">{{"app-title" | translate}}</span>
         </div>
         <nav class="nav-links">
-            <a mat-button routerLink="/">Strona główna</a>
-
+            <button mat-icon-button routerLink="/">
+                <mat-icon style="color: white">home</mat-icon>
+            </button>
+            <a mat-button routerLink="/users" *ngIf="authService.hasAnyRole(['ADMIN'])">{{"navbar.users" |
+                translate}}</a>
+            <a mat-button routerLink="/stats" *ngIf="authService.hasAnyRole(['ADMIN'])">{{"navbar.stats" |
+                translate}}</a>
+            <a mat-button routerLink="/all-appointments"
+                *ngIf="authService.hasAnyRole(['ADMIN'])">{{"navbar.all-appointments" | translate}}</a>
+            <a mat-button routerLink="/hairdressers"
+                *ngIf="authService.hasAnyRole(['ADMIN','HAIRDRESSER','CUSTOMER'])">{{"navbar.hairdressers" |
+                translate}}</a>
+            <a mat-button routerLink="/my-client-appointments"
+                *ngIf="authService.hasAnyRole(['CUSTOMER'])">{{"navbar.my-appointments" |
+                translate}}</a>
+            <a mat-button routerLink="/my-hairdresser-appointments"
+                *ngIf="authService.hasAnyRole(['HAIRDRESSER'])">{{"navbar.my-appointments" |
+                translate}}</a>
+            <a mat-button routerLink="/appointments"
+                *ngIf="authService.hasAnyRole(['ADMIN','HAIRDRESSER','CUSTOMER'])">{{"navbar.appointments" |
+                translate}}</a>
+            <a mat-button routerLink="/hairoffers"
+                *ngIf="authService.hasAnyRole(['ADMIN','HAIRDRESSER','CUSTOMER'])">{{"navbar.hairoffers" |
+                translate}}</a>
             <div *ngIf="authService.isLoggedIn(); else loggedOut">
-                <span>Witaj, {{ username }}! [{{ userRole }}]</span>
-                <a mat-button routerLink="/logout">Wyloguj</a>
+                <span>{{"welcome-user" | translate }}, {{ username }}! [{{ 'roles.' + userRole | translate }}]</span>
+                <button mat-icon-button routerLink="/profile">
+                    <mat-icon style="color: white">account_circle</mat-icon>
+                </button>
+                <button mat-icon-button routerLink="/logout">
+                    <mat-icon style="color: white">logout</mat-icon>
+                </button>
             </div>
             <ng-template #loggedOut>
-                <a mat-button routerLink="/login">Zaloguj się</a>
+                <button mat-icon-button routerLink="/login">
+                    <mat-icon style="color: white">login</mat-icon>
+                </button>
             </ng-template>
+            <app-language-switcher />
         </nav>
     </mat-toolbar>
 </header>

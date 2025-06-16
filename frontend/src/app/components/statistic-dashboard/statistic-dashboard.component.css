@@ -1,0 +1,51 @@
+.dashboard-title {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+.charts-container {
+    display: flex;
+    /* Użyj Flexbox */
+    flex-wrap: wrap;
+    /* Pozwala na zawijanie elementów do nowej linii na mniejszych ekranach */
+    justify-content: center;
+    /* Centruje elementy w poziomie */
+    gap: 20px;
+    /* Dodaje odstęp między elementami (kartami wykresów) */
+    padding: 20px;
+}
+
+/* Stylizacja dla kart wykresów, aby miały elastyczną szerokość i równą wysokość */
+app-statistics,
+app-hairoffer-chart {
+    /* Flex-grow, flex-shrink, flex-basis */
+    flex: 1 1 45%;
+    /* Pozwala na 2 elementy w rzędzie. Każdy zajmuje max 45% szerokości,
+                    aby było miejsce na gap i padding */
+    max-width: 500px;
+    /* Ogranicz maksymalną szerokość karty, żeby nie były zbyt rozciągnięte */
+    min-width: 300px;
+    /* Minimalna szerokość karty przed zawinięciem */
+
+    /* Dodatkowe wyrównanie dla mat-card, jeśli potrzebne */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Albo center, w zależności od preferencji */
+}
+
+/* Możesz dodać style bezpośrednio do mat-card wewnątrz komponentów wykresów,
+   aby upewnić się, że mają jednolite marginesy/paddingi */
+app-statistics mat-card,
+app-hairoffer-chart mat-card {
+    width: 100%;
+    /* Upewnij się, że karta wypełnia dostępną przestrzeń */
+    height: 100%;
+    /* Upewnij się, że karta wypełnia dostępną przestrzeń, przydatne dla równej wysokości */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+    /* Ważne, aby padding nie zwiększał szerokości/wysokości */
+}
