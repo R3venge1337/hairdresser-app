@@ -26,6 +26,7 @@ CREATE TABLE appointments (
     total_cost DECIMAL(10, 2) NOT NULL,
     status VARCHAR(50) NOT NULL,
     booked_date TIMESTAMP NOT NULL,
+    finished_appointment_date TIMESTAMP NOT NULL,
     customer_id_fk  bigint NOT NULL,
     hairdresser_id_fk  bigint NOT NULL
 );
