@@ -121,7 +121,7 @@ The API utilizes a modern, stateless security approach based on **JSON Web Token
 
 1.  **Clone the repository:**
     ```bash
-    git clone [Your Repository URL]
+    git clone [(https://github.com/R3venge1337/hairdresser-app.git)]
     cd [Your Project Directory Name]
     ```
 2.  **Configure Database:**
