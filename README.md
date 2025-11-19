@@ -7,7 +7,8 @@
 
 * [Project Overview](#project-overview)
 * [Architecture and Features](#architecture-and-features)
-* [Technologies](#technologies)
+* [Technologies (Full-Stack)](#technologies-full-stack)
+* [Frontend Features](#frontend-features)
 * [Security (JWT)](#security-jwt)
 * [How to Run Locally](#how-to-run-locally)
 * [Testing Status](#testing-status)
@@ -17,13 +18,13 @@
 
 ---
 
-## 💡 Project Overview
+##  Project Overview
 
 This project is a high-quality **RESTful API** designed to manage all operational aspects of a modern hair salon. It covers complex business logic, including **appointment scheduling**, **staff (hairdresser) management**, user authentication via **JWT**, and providing detailed **statistics** on service usage and appointment status.
 
 The application is built with a focus on clean architecture, security, and testability.
 
-## 🏗️ Architecture and Features
+##  Architecture and Features
 
 The application structure follows a clean, **layered architecture** (Controller -> Facade/Service -> Repository) and includes several key features:
 
@@ -36,24 +37,48 @@ The application structure follows a clean, **layered architecture** (Controller 
 
 ---
 
-## 🛠️ Technologies
+##  Technologies (Full-Stack)
 
-This is a modern **Java/Spring** backend service.
+The project utilizes a powerful **Full-Stack** approach:
 
-| Category | Technology | Version | Usage and Importance |
-| :--- | :--- | :--- | :--- |
-| **Backend Framework** | **Spring Boot** | 3.4.4 | Application setup and dependency management. |
+### Backend Technologies (Java/Spring)
+
+| Technology | Version | Usage and Importance |
+| :--- | :--- | :--- |
+| **Spring Boot** | 3.4.4 | Application setup and dependency management. |
 | **Programming Language** | **Java** | 21 | Long-Term Support (LTS) version. |
 | **Persistence** | **Spring Data JPA** & **Hibernate** | - | ORM and database interaction. |
-| **Security** | **Spring Security** | - | Authentication and authorization layer. |
-| **Token Management** | **JWT** (`jjwt-api`) | 0.12.6 | Securing REST endpoints and user sessions. |
-| **Database** | **PostgreSQL** | - | Production-ready relational database. |
-| **Schema Migration** | **Liquibase** | - | Database version control and reliable schema updates. |
-| **Utilities** | **Lombok, Apache Commons** | - | Boilerplate reduction and utility functions. |
+| **Security** | **Spring Security**, **JWT** | 0.12.6 | Authentication, authorization, and token management. |
+| **Database** | **PostgreSQL**, **Liquibase** | - | Production-ready DB and schema version control. |
+| **API Docs** | **SpringDoc OpenAPI (Swagger)** | 2.8.8 | Automatic generation of API documentation. |
+
+### Frontend Technologies (Angular)
+
+The User Interface (UI) is built using a rich set of modern tools:
+
+| Technology | Version | Usage and Importance |
+| :--- | :--- | :--- |
+| **Framework** | **Angular** | 19.2.0 | Modern SPA framework. |
+| **UI Components** | **Angular Material** | 19.2.10 | Professional and accessible UI components. |
+| **Internationalization** | **ngx-translate** | 16.0.4 | Support for **multiple languages** (i18n). |
+| **Data Visualization** | **Chart.js**, **ng2-charts** | v4+ | Displaying **statistics and reports** (e.g., appointment status counts). |
+| **Date/Time Handling** | **Luxon** | 3.6.1 | Advanced handling and formatting of dates and time slots. |
+| **JWT Decoding** | **jwt-decode** | 4.0.0 | Client-side decoding of JWT for accessing user data. |
 
 ---
 
-## 🔒 Security (JWT)
+##  Frontend Features
+
+The Angular frontend offers a professional and highly functional user experience:
+
+* **Internationalization (i18n):** Full support for switching between multiple languages using `ngx-translate`.
+* **Dynamic Reporting:** Real-time generation of **charts and graphs** (using Chart.js) for business statistics, such as completed services and current appointment status breakdown.
+* **Advanced Scheduling UI:** Intuitive interface for selecting available time slots based on complex backend calculations (Luxon for precise time handling).
+* **Role-Based Views:** Presentation of different dashboards and menus depending on the user's role (Client, Hairdresser, Admin).
+
+---
+
+##  Security (JWT)
 
 The API utilizes a modern, stateless security approach based on **JSON Web Tokens (JWT)**:
 
@@ -61,12 +86,15 @@ The API utilizes a modern, stateless security approach based on **JSON Web Token
 * The **Access Token** is used to authorize subsequent requests to secured endpoints (e.g., `/api/appointments`).
 * The **Refresh Token** allows users to obtain a new access token without re-authenticating, managed via the `/refresh-token` endpoint.
 
+---
+
 ## 🚀 How to Run Locally
 
 ### 1. Prerequisites
 
 * **JDK 21+**
 * **Maven**
+* **Node.js & npm**
 * **PostgreSQL** instance running locally (or via Docker Compose).
 
 ### 2. Setup
@@ -74,7 +102,7 @@ The API utilizes a modern, stateless security approach based on **JSON Web Token
 1.  **Clone the repository:**
     ```bash
     git clone [Twój URL do repozytorium]
-    cd backend
+    cd [Nazwa katalogu projektu]
     ```
 2.  **Configure Database:**
     * Ensure your local PostgreSQL instance is running.
@@ -85,17 +113,25 @@ The API utilizes a modern, stateless security approach based on **JSON Web Token
 
 ### 3. Build and Run
 
-1.  **Build the project:**
+1.  **Build and Run Backend (Java):**
     ```bash
     ./mvnw clean install
-    ```
-2.  **Run the application:**
-    ```bash
     java -jar target/backend-0.0.1-SNAPSHOT.jar
-    # (Or run directly from your IDE: SpringBootApplication main class)
+    ```
+2.  **Run Frontend (Angular):**
+    ```bash
+    cd [Nazwa katalogu frontend] # Zmień na ścieżkę do Twojego frontendu
+    npm install
+    npm start
     ```
 
-The API will be available at: `http://localhost:8080` (or configured port).
+### Access Points
+
+* **Backend API:** `http://localhost:8080` (or configured port)
+* **Frontend UI:** `http://localhost:4200` (domyślnie dla Angulara)
+* **API Documentation (Swagger):** `http://localhost:8080/swagger-ui/index.html`
+
+---
 
 ## 🧪 Testing Status
 
@@ -161,10 +197,10 @@ The application is logically divided into several functional domains:
 The following properties should be placed in the `secret.properties` file for secure configuration. **These values must not be committed to the repository.**
 
 ```properties
-jwt.secret.key=[Your 512-bit secret key] # Long, secure key for signing JWTs
-jwt.expirationTime=86400                 # Access token expiration (seconds)
-jwt.refreshExpirationTime=604800         # Refresh token expiration (seconds)
-DB_PASS=postgres                         # Database password
+jwt.secret.key=[Your 512-bit secret key]
+jwt.expirationTime=86400
+jwt.refreshExpirationTime=604800
+DB_PASS=postgres
 ```
 
 ## Application View
