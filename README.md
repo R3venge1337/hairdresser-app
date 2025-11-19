@@ -1,3 +1,173 @@
+# 💇‍♀️ Hair Salon Management API (Backend)
+
+> **A robust backend system for managing a hair salon, handling appointments, staff, client data, and security.**
+> This application serves as the core API for a full-stack salon management platform.
+
+## 📝 Table of Contents
+
+* [Project Overview](#project-overview)
+* [Architecture and Features](#architecture-and-features)
+* [Technologies](#technologies)
+* [Security (JWT)](#security-jwt)
+* [How to Run Locally](#how-to-run-locally)
+* [Testing Status](#testing-status)
+* [API Reference](#api-reference)
+* [Configuration and Secrets](#configuration-and-secrets)
+* [Application View](#application-view)
+
+---
+
+## 💡 Project Overview
+
+This project is a high-quality **RESTful API** designed to manage all operational aspects of a modern hair salon. It covers complex business logic, including **appointment scheduling**, **staff (hairdresser) management**, user authentication via **JWT**, and providing detailed **statistics** on service usage and appointment status.
+
+The application is built with a focus on clean architecture, security, and testability.
+
+## 🏗️ Architecture and Features
+
+The application structure follows a clean, **layered architecture** (Controller -> Facade/Service -> Repository) and includes several key features:
+
+* **Appointment Management:** Full CRUD operations, filtering by user/status/date, and complex scheduling logic to find **available time slots** and **available hairdressers**.
+* **User/Role Management:** Different user roles (Clients, Hairdressers, Admins) with dedicated endpoints for retrieving user lists and profile details.
+* **Authentication & Security:** Robust security layer using **Spring Security** and **JWT (JSON Web Tokens)** for authentication, token expiration, and refresh token mechanism.
+* **Business Statistics:** Dedicated endpoints for generating statistics on appointment status counts and the popularity of specific hair offers.
+* **Offer Management:** CRUD operations for defining available hair services (`HairOfferController`).
+* **Database Management:** Schema versioning and migration handled by **Liquibase**.
+
+---
+
+## 🛠️ Technologies
+
+This is a modern **Java/Spring** backend service.
+
+| Category | Technology | Version | Usage and Importance |
+| :--- | :--- | :--- | :--- |
+| **Backend Framework** | **Spring Boot** | 3.4.4 | Application setup and dependency management. |
+| **Programming Language** | **Java** | 21 | Long-Term Support (LTS) version. |
+| **Persistence** | **Spring Data JPA** & **Hibernate** | - | ORM and database interaction. |
+| **Security** | **Spring Security** | - | Authentication and authorization layer. |
+| **Token Management** | **JWT** (`jjwt-api`) | 0.12.6 | Securing REST endpoints and user sessions. |
+| **Database** | **PostgreSQL** | - | Production-ready relational database. |
+| **Schema Migration** | **Liquibase** | - | Database version control and reliable schema updates. |
+| **Utilities** | **Lombok, Apache Commons** | - | Boilerplate reduction and utility functions. |
+
+---
+
+## 🔒 Security (JWT)
+
+The API utilizes a modern, stateless security approach based on **JSON Web Tokens (JWT)**:
+
+* Users log in via the `/login` endpoint, receiving an access token and a refresh token.
+* The **Access Token** is used to authorize subsequent requests to secured endpoints (e.g., `/api/appointments`).
+* The **Refresh Token** allows users to obtain a new access token without re-authenticating, managed via the `/refresh-token` endpoint.
+
+## 🚀 How to Run Locally
+
+### 1. Prerequisites
+
+* **JDK 21+**
+* **Maven**
+* **PostgreSQL** instance running locally (or via Docker Compose).
+
+### 2. Setup
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [Twój URL do repozytorium]
+    cd backend
+    ```
+2.  **Configure Database:**
+    * Ensure your local PostgreSQL instance is running.
+    * Set up a database matching the configuration in `secret.properties`.
+
+3.  **Set Secret Properties:**
+    * Create or update the `secret.properties` file with your configuration (see [Configuration and Secrets](#configuration-and-secrets) below).
+
+### 3. Build and Run
+
+1.  **Build the project:**
+    ```bash
+    ./mvnw clean install
+    ```
+2.  **Run the application:**
+    ```bash
+    java -jar target/backend-0.0.1-SNAPSHOT.jar
+    # (Or run directly from your IDE: SpringBootApplication main class)
+    ```
+
+The API will be available at: `http://localhost:8080` (or configured port).
+
+## 🧪 Testing Status
+
+The project utilizes **JUnit 5** and **Spring Security Test** for verifying application logic and security rules.
+
+* **Tested Layers:** Tests cover core business logic within the service/facade layer and integration tests to verify security constraints on controllers.
+* **Running Tests:**
+    ```bash
+    ./mvnw test
+    ```
+
+---
+
+## 🔗 API Reference
+
+The application is logically divided into several functional domains:
+
+### Authentication and User Management (`AuthorizationController`, `UserController`)
+
+| Method | Endpoint (Path) | Description |
+| :--- | :--- | :--- |
+| `POST` | `/api/auth/login` | Authenticates a user and returns **JWT tokens**. |
+| `POST` | `/api/auth/registration` | Registers a new user (client). |
+| `POST` | `/api/auth/logout` | Invalidates the current user session. |
+| `POST` | `/api/auth/refresh-token` | Obtains a new Access Token using the Refresh Token. |
+| `GET` | `/api/my-profile` | Retrieves detailed information about the authenticated user's profile. |
+| `GET` | `/api/all-profiles` | Retrieves all user profiles (Requires Admin/Staff role). |
+
+### Appointment Scheduling and Management (`AppointmentController`)
+
+| Method | Endpoint (Path) | Description |
+| :--- | :--- | :--- |
+| `POST` | `/api/appointments` | **Creates (Makes) a new appointment.** |
+| `POST` | `/api/appointments/all` | Retrieves a **paged, filtered** list of all appointments. |
+| `GET` | `/api/appointments/slots` | Calculates and returns **available time slots** for a given date and duration. |
+| `POST` | `/api/available-hairdressers` | Returns a list of **available hairdressers** for a specific time slot. |
+| `GET` | `/api/appointments/{uuid}` | Retrieves a single appointment by UUID. |
+| `PATCH` | `/api/appointments/{uuid}/change-status` | Changes the appointment status (e.g., Booked, Completed, Cancelled). |
+| `PATCH` | `/api/appointments/{uuid}/reschedule` | Updates the date/time of an existing appointment. |
+| `POST` | `/api/my-appointments` | Retrieves a **paged, filtered** list of appointments for the currently authenticated client. |
+
+### Service and Staff Management (`HairOfferController`, `HairdresserController`)
+
+| Method | Endpoint (Path) | Description |
+| :--- | :--- | :--- |
+| `POST` | `/api/hair-offers/filter` | Retrieves a **paged, filtered** list of hair services/offers. |
+| `POST` | `/api/hair-offers` | **Creates** a new hair service offer. |
+| `PUT` | `/api/hair-offers/{id}` | **Updates** an existing hair service offer. |
+| `POST` | `/api/hairdressers` | Registers a new hairdresser (staff member). |
+| `GET` | `/api/users?roleName={role}` | Retrieves all users matching a specific role (e.g., 'HAIRDRESSER'). |
+
+### Statistics and Reporting (`AppointmentController`)
+
+| Method | Endpoint (Path) | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/appointments/statistics-by-status` | Retrieves counts of appointments grouped by their current status. |
+| `GET` | `/statistics/statistics-by-hairoffer-name` | Retrieves counts of **completed** appointments grouped by the type of hair offer. |
+
+---
+
+## 🔒 Configuration and Secrets
+
+The following properties should be placed in the `secret.properties` file for secure configuration. **These values must not be committed to the repository.**
+
+```properties
+jwt.secret.key=[Your 512-bit secret key] # Long, secure key for signing JWTs
+jwt.expirationTime=86400                 # Access token expiration (seconds)
+jwt.refreshExpirationTime=604800         # Refresh token expiration (seconds)
+DB_PASS=postgres                         # Database password
+```
+
+## Application View
 <img width="1918" height="922" alt="Image" src="https://github.com/user-attachments/assets/92066edf-021d-4042-a02d-0032845fdc40" />
 
 <img width="1919" height="922" alt="Image" src="https://github.com/user-attachments/assets/485ccffc-d3b3-4bf9-bd59-841d60ad8550" />
