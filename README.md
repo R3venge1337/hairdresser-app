@@ -7,6 +7,7 @@
 
 * [Project Overview](#project-overview)
 * [Architecture and Features](#architecture-and-features)
+* [System Diagrams](#system-diagrams)
 * [Technologies (Full-Stack)](#technologies-full-stack)
 * [Frontend Features](#frontend-features)
 * [Security (JWT)](#security-jwt)
@@ -34,6 +35,26 @@ The application structure follows a clean, **layered architecture** (Controller 
 * **Business Statistics:** Dedicated endpoints for generating statistics on appointment status counts and the popularity of specific hair offers.
 * **Offer Management:** CRUD operations for defining available hair services (`HairOfferController`).
 * **Database Management:** Schema versioning and migration handled by **Liquibase**.
+
+---
+
+## 📊 System Diagrams
+
+The following diagrams illustrate the design, structure, and relationships within the system.
+
+* **Architectural Overview:** The architecture follows a **Monolithic** (or **Layered**) design using the MVC pattern. 
+* **Database Schema (ERD):** Shows the relationships between key entities like Appointments, Users, Hairdressers, and Hair Offers.
+    
+* **UML Class Diagram:** Details the structure of core classes and their methods, demonstrating the clean segregation into Facades, Services, and Repositories. 
+* **UML Use Case Diagram:** Illustrates the functional scope of the system from the perspective of different actors (Client, Hairdresser, Admin).
+
+<img width="1166" height="686" alt="Image" src="https://github.com/user-attachments/assets/0637f33a-54cd-4b99-abd3-e0e1b20220d0" />
+
+<img width="677" height="715" alt="Image" src="https://github.com/user-attachments/assets/d235de2d-f931-402f-8872-87dfe67172ae" />
+
+<img width="609" height="256" alt="Image" src="https://github.com/user-attachments/assets/5ff537b9-56a1-4fc6-9f8a-2cfb98b248ae" />
+
+<img width="644" height="807" alt="Image" src="https://github.com/user-attachments/assets/9824380d-7da8-476d-a11b-2e3fd717c148" />
 
 ---
 
@@ -145,7 +166,7 @@ The project utilizes **JUnit 5** and **Spring Security Test** for verifying appl
 
 ---
 
-## 🔗 API Reference
+##  API Reference
 
 The application is logically divided into several functional domains:
 
@@ -192,7 +213,7 @@ The application is logically divided into several functional domains:
 
 ---
 
-## 🔒 Configuration and Secrets
+##  Configuration and Secrets
 
 The following properties should be placed in the `secret.properties` file for secure configuration. **These values must not be committed to the repository.**
 
@@ -232,10 +253,4 @@ DB_PASS=postgres
 
 <img width="1919" height="920" alt="Image" src="https://github.com/user-attachments/assets/97558726-9aa0-431e-bfdd-6fc47d7a3604" />
 
-<img width="1166" height="686" alt="Image" src="https://github.com/user-attachments/assets/0637f33a-54cd-4b99-abd3-e0e1b20220d0" />
 
-<img width="677" height="715" alt="Image" src="https://github.com/user-attachments/assets/d235de2d-f931-402f-8872-87dfe67172ae" />
-
-<img width="609" height="256" alt="Image" src="https://github.com/user-attachments/assets/5ff537b9-56a1-4fc6-9f8a-2cfb98b248ae" />
-
-<img width="644" height="807" alt="Image" src="https://github.com/user-attachments/assets/9824380d-7da8-476d-a11b-2e3fd717c148" />
