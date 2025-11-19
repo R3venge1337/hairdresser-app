@@ -15,7 +15,6 @@
 * [Testing Status](#testing-status)
 * [API Reference](#api-reference)
 * [Configuration and Secrets](#configuration-and-secrets)
-* [Application View](#application-view)
 
 ---
 
@@ -38,7 +37,7 @@ The application structure follows a clean, **layered architecture** (Controller 
 
 ---
 
-## 📊 System Diagrams
+##  System Diagrams
 
 The following diagrams illustrate the design, structure, and relationships within the system.
 
@@ -109,7 +108,7 @@ The API utilizes a modern, stateless security approach based on **JSON Web Token
 
 ---
 
-## 🚀 How to Run Locally
+##  How to Run Locally
 
 ### 1. Prerequisites
 
@@ -122,8 +121,8 @@ The API utilizes a modern, stateless security approach based on **JSON Web Token
 
 1.  **Clone the repository:**
     ```bash
-    git clone [Twój URL do repozytorium]
-    cd [Nazwa katalogu projektu]
+    git clone [Your Repository URL]
+    cd [Your Project Directory Name]
     ```
 2.  **Configure Database:**
     * Ensure your local PostgreSQL instance is running.
@@ -141,7 +140,7 @@ The API utilizes a modern, stateless security approach based on **JSON Web Token
     ```
 2.  **Run Frontend (Angular):**
     ```bash
-    cd [Nazwa katalogu frontend] # Zmień na ścieżkę do Twojego frontendu
+    cd [Your Frontend Directory Name]
     npm install
     npm start
     ```
@@ -149,12 +148,12 @@ The API utilizes a modern, stateless security approach based on **JSON Web Token
 ### Access Points
 
 * **Backend API:** `http://localhost:8080` (or configured port)
-* **Frontend UI:** `http://localhost:4200` (domyślnie dla Angulara)
+* **Frontend UI:** `http://localhost:4200` (default for Angular)
 * **API Documentation (Swagger):** `http://localhost:8080/swagger-ui/index.html`
 
 ---
 
-## 🧪 Testing Status
+##  Testing Status
 
 The project utilizes **JUnit 5** and **Spring Security Test** for verifying application logic and security rules.
 
@@ -252,5 +251,3 @@ DB_PASS=postgres
 <img width="1919" height="918" alt="Image" src="https://github.com/user-attachments/assets/5d420d4d-f2d5-4b35-b520-16f1fcb5cd43" />
 
 <img width="1919" height="920" alt="Image" src="https://github.com/user-attachments/assets/97558726-9aa0-431e-bfdd-6fc47d7a3604" />
-
-
